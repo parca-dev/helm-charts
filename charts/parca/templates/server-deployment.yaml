@@ -1,0 +1,81 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "parca.fullname" . }}
+  labels:
+    {{- include "parca.labels.server" . | nindent 4 }}
+spec:
+{{- /*
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+*/}}
+  selector:
+    matchLabels:
+      {{- include "parca.selectorLabels.server" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.server.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "parca.selectorLabels.server" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "parca.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.server.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}-server
+          securityContext:
+            {{- toYaml .Values.server.securityContext | nindent 12 }}
+          image: "{{ .Values.server.image.repository }}:{{ .Values.server.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.server.image.pullPolicy }}
+          args:
+            - /parca
+            - --config-path=/var/parca/parca.yaml
+            - --log-level={{ .Values.server.logLevel }}
+            - --cors-allowed-origins={{ .Values.server.corsAllowedOrigins }}
+            - --storage-tsdb-retention-time={{ .Values.server.retentionTime }}
+          livenessProbe:
+            exec:
+              command:
+              - /grpc-health-probe
+              - -v
+              - -addr=:7070
+            initialDelaySeconds: 5
+          ports:
+          - containerPort: 7070
+            name: http
+          readinessProbe:
+            exec:
+              command:
+              - /grpc-health-probe
+              - -v
+              - -addr=:7070
+            initialDelaySeconds: 10
+          volumeMounts:
+          - mountPath: /var/parca
+            name: {{ include "parca.fullname" . }}-server-config
+          resources:
+            {{- toYaml .Values.server.resources | nindent 12 }}
+      volumes:
+      - configMap:
+          name: {{ include "parca.fullname" . }}-server-config
+        name: {{ include "parca.fullname" . }}-server-config
+      {{- with .Values.server.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.server.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.server.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

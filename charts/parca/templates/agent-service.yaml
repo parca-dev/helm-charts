@@ -1,0 +1,18 @@
+{{- if .Values.agent.enabled -}}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "parca.fullname" . }}-agent
+  labels:
+    {{- include "parca.labels.agent" . | nindent 4 }}
+spec:
+  type: {{ .Values.agent.service.type }}
+  ports:
+    - port: {{ .Values.agent.service.port }}
+      targetPort: 7071
+      protocol: TCP
+      name: http
+  clusterIP: None
+  selector:
+    {{- include "parca.selectorLabels.agent" . | nindent 6 }}
+{{- end }}

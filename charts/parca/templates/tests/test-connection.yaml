@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "{{ include "parca.fullname" . }}-test-connection"
+  labels:
+    {{- include "parca.labels" . | nindent 4 }}
+  annotations:
+    "helm.sh/hook": test
+spec:
+  containers:
+    - name: wget-server
+      image: busybox
+      command: ['wget']
+      args: ['{{ include "parca.fullname" . }}-server:{{ .Values.server.service.port }}']
+    - name: wget-agent
+      image: busybox
+      command: ['wget']
+      args: ['{{ include "parca.fullname" . }}-agent:{{ .Values.agent.service.port }}']
+  restartPolicy: Never

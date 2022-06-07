@@ -1,0 +1,29 @@
+{{- if .Values.server.serviceMonitor.enabled }}
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: {{ template "parca.fullname" . }}-server
+  labels:
+    {{- include "parca.labels.server" . | nindent 4 }}
+spec:
+  jobLabel: {{ .Values.server.serviceMonitor.jobLabel | quote }}
+  selector:
+    matchLabels:
+      {{- include "parca.selectorLabels.server" . | nindent 6 }}
+  namespaceSelector:
+    matchNames:
+    - {{ .Release.Namespace }}
+  endpoints:
+  - port: http
+    {{- if .Values.server.serviceMonitor.interval }}
+    interval: {{ .Values.server.serviceMonitor.interval }}
+    {{- end }}
+    {{- if .Values.server.serviceMonitor.metricRelabelings }}
+    metricRelabelings:
+    {{ toYaml .Values.server.serviceMonitor.metricRelabelings | indent 4 }}
+    {{- end }}
+    {{- if .Values.server.serviceMonitor.relabelings }}
+    relabelings:
+    {{ toYaml .Values.server.serviceMonitor.relabelings | indent 4 }}
+    {{- end }}
+{{- end }}

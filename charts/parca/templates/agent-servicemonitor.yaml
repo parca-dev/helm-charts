@@ -1,0 +1,31 @@
+{{- if .Values.agent.enabled -}}
+{{- if .Values.agent.serviceMonitor.enabled }}
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: {{ template "parca.fullname" . }}-agent
+  labels:
+    {{- include "parca.labels.agent" . | nindent 4 }}
+spec:
+  jobLabel: {{ .Values.agent.serviceMonitor.jobLabel | quote }}
+  selector:
+    matchLabels:
+      {{- include "parca.selectorLabels.agent" . | nindent 6 }}
+  namespaceSelector:
+    matchNames:
+    - {{ .Release.Namespace }}
+  endpoints:
+  - port: http
+    {{- if .Values.agent.serviceMonitor.interval }}
+    interval: {{ .Values.agent.serviceMonitor.interval }}
+    {{- end }}
+    {{- if .Values.agent.serviceMonitor.metricRelabelings }}
+    metricRelabelings:
+    {{ toYaml .Values.agent.serviceMonitor.metricRelabelings | indent 4 }}
+    {{- end }}
+    {{- if .Values.agent.serviceMonitor.relabelings }}
+    relabelings:
+    {{ toYaml .Values.agent.serviceMonitor.relabelings | indent 4 }}
+    {{- end }}
+{{- end }}
+{{- end }}
