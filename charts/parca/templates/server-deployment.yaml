@@ -40,7 +40,6 @@ spec:
             - --config-path=/var/parca/parca.yaml
             - --log-level={{ .Values.server.logLevel }}
             - --cors-allowed-origins={{ .Values.server.corsAllowedOrigins }}
-            - --storage-tsdb-retention-time={{ .Values.server.retentionTime }}
           livenessProbe:
             exec:
               command:
