@@ -61,6 +61,8 @@ server:
   logLevel: info
   # -- CORS setting
   corsAllowedOrigins: "*"
+  # -- Active memory dedicated for storage. 512MB my default
+  storageActiveMemory: 536870912
   # -- parca server config block
   config:
     debug_info:

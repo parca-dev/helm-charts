@@ -1,6 +1,6 @@
 # parca
 
-![Version: 1.6.2](https://img.shields.io/badge/Version-1.6.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.11.1](https://img.shields.io/badge/AppVersion-v0.11.1-informational?style=flat-square)
+![Version: 1.6.3](https://img.shields.io/badge/Version-1.6.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.12.0-rc.0](https://img.shields.io/badge/AppVersion-v0.12.0--rc.0-informational?style=flat-square)
 
 Open Source Infrastructure-wide continuous profiling
 
@@ -38,7 +38,7 @@ helm repo add parca https://parca-dev.github.io/helm-charts
 | agent.enabled | bool | `true` | Allows disabling parca agent |
 | agent.image.pullPolicy | string | `"IfNotPresent"` | Overrides pullpolicy |
 | agent.image.repository | string | `"ghcr.io/parca-dev/parca-agent"` | Overrides the image repository |
-| agent.image.tag | string | `"v0.8.2"` | Overrides the image tag |
+| agent.image.tag | string | `"v0.9.0"` | Overrides the image tag |
 | agent.logLevel | string | `"info"` | Agent log level |
 | agent.nodeSelector | object | `{}` | node selector for scheduling agent pods |
 | agent.podAnnotations | object | `{}` | Additional annotations for pods |
@@ -66,7 +66,7 @@ helm repo add parca https://parca-dev.github.io/helm-charts
 | server.corsAllowedOrigins | string | `"*"` | CORS setting |
 | server.image.pullPolicy | string | `"IfNotPresent"` | Overrides pull policy for server |
 | server.image.repository | string | `"ghcr.io/parca-dev/parca"` | Overrides the image repository for server |
-| server.image.tag | string | `"v0.12.0-rc.0"` | Overrides the image tag for server |
+| server.image.tag | string | `"v0.12.0"` | Overrides the image tag for server |
 | server.logLevel | string | `"info"` | logging level of parca server |
 | server.nodeSelector | object | `{}` | node selector for scheduling server pod |
 | server.podAnnotations | object | `{}` | additional annotations for server pod |
@@ -78,6 +78,7 @@ helm repo add parca https://parca-dev.github.io/helm-charts
 | server.service.type | string | `"ClusterIP"` | service type for server |
 | server.serviceMonitor.enabled | bool | `false` | enables servicemonitor for server monitoring |
 | server.serviceMonitor.jobLabel | string | `"parca-server"` |  |
+| server.storageActiveMemory | int | `536870912` | Active memory dedicated for storage. 512MB my default |
 | server.tolerations | object | `{}` | tolerations for scheduling server pod |
 | serviceAccount.annotations | object | `{}` | Annotations to add to the service account |
 | serviceAccount.create | bool | `true` | Specifies whether a service account should be created |

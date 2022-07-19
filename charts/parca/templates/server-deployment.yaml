@@ -40,6 +40,7 @@ spec:
             - --config-path=/var/parca/parca.yaml
             - --log-level={{ .Values.server.logLevel }}
             - --cors-allowed-origins={{ .Values.server.corsAllowedOrigins }}
+            - --storage-active-memory={{ .Values.server.storageActiveMemory }}
           livenessProbe:
             exec:
               command:
