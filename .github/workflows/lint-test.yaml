@@ -32,7 +32,7 @@ jobs:
           fi
 
       - name: Run chart-testing (lint)
-        run: ct lint --check-version-increment=false --chart-repos bitnami=https://charts.bitnami.com/bitnami --validate-maintainers=false --validate-yaml=false
+        run: ct lint --check-version-increment=false --validate-maintainers=false --validate-yaml=false
 
       - name: Create kind cluster
         uses: helm/kind-action@v1.2.0

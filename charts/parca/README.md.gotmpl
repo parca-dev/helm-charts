@@ -8,6 +8,14 @@
 
 {{ template "chart.requirementsSection" . }}
 
+### Changes
+
+#### 2.0.0
+In chart version 2.0.0, following things has changed:
+
+* agent.socketPath is now unset by default. If you need custom path to CRI socket (ie for k3s it is /run/containerd/containerd.sock) you will need to specify it manually now.
+* server.retentionTime has been removed from parca, use server.storageActiveMemory instead
+
 ### Usage
 
 Please consult [official docs](https://www.parca.dev/docs/overview) on usage.
