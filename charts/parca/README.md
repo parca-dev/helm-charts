@@ -1,12 +1,20 @@
 # parca
 
-![Version: 1.6.3](https://img.shields.io/badge/Version-1.6.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.12.0-rc.0](https://img.shields.io/badge/AppVersion-v0.12.0--rc.0-informational?style=flat-square)
+![Version: 2.0.0](https://img.shields.io/badge/Version-2.0.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.12.0](https://img.shields.io/badge/AppVersion-v0.12.0-informational?style=flat-square)
 
 Open Source Infrastructure-wide continuous profiling
 
 ## Source Code
 
 * <https://github.com/parca-dev/helm-charts>
+
+### Changes
+
+#### 2.0.0
+In chart version 2.0.0, following things has changed:
+
+* agent.socketPath is now unset by default. If you need custom path to CRI socket (ie for k3s it is /run/containerd/containerd.sock) you will need to specify it manually now.
+* server.retentionTime has been removed from parca, use server.storageActiveMemory instead
 
 ### Usage
 
@@ -50,7 +58,7 @@ helm repo add parca https://parca-dev.github.io/helm-charts
 | agent.service.type | string | `"ClusterIP"` | service type for agent |
 | agent.serviceMonitor.enabled | bool | `false` | enables prometheus servicemonitor for agent |
 | agent.serviceMonitor.jobLabel | string | `"parca-agent"` |  |
-| agent.socketPath | string | `"/run/containerd/containerd.sock"` | Path to host docker/containerd/crio socket |
+| agent.socketPath | string | `""` | Path to host docker/containerd/crio socket |
 | agent.tolerations | list | `[{"effect":"NoSchedule","operator":"Exists"},{"effect":"NoExecute","operator":"Exists"}]` | node tolerations for scheduling agent pods |
 | fullnameOverride | string | `""` | Overrides helm-generated chart fullname |
 | imagePullSecrets | list | `[]` | specifies pull secrets for image repository |
