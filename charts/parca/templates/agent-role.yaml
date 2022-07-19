@@ -1,0 +1,18 @@
+{{- if .Values.agent.enabled -}}
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  labels:
+    {{- include "parca.labels.agent" . | nindent 4 }}
+  name: {{ include "parca.fullname" . }}-agent
+  namespace: {{ .Release.Namespace }}
+rules:
+- apiGroups:
+  - policy
+  resourceNames:
+  - {{ include "parca.fullname" . }}-agent
+  resources:
+  - podsecuritypolicies
+  verbs:
+  - use
+{{- end }}
