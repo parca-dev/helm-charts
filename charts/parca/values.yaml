@@ -16,7 +16,7 @@ agent:
     # -- Overrides the image tag
     tag: "v0.9.0"
   # -- Path to host docker/containerd/crio socket
-  socketPath: /run/containerd/containerd.sock
+  socketPath: ""
   # -- Agent log level
   logLevel: info
   # -- label selector for filtering out pods with pprof, ie "parca=enabled"

@@ -41,7 +41,9 @@ spec:
             - --insecure
             - --insecure-skip-verify
             - --temp-dir=/tmp
+            {{- if .Values.agent.socketPath }}
             - --socket-path={{ .Values.agent.socketPath }}
+            {{- end }}
             {{- if .Values.agent.podLabelSelector }}
             - --pod-label-selector={{ .Values.agent.podLabelSelector }}
             {{- end }}
