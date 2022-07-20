@@ -42,6 +42,9 @@ spec:
             - --cors-allowed-origins={{ .Values.server.corsAllowedOrigins }}
             # Multiply by 1, so large integers aren't rendered in scientific notation
             - --storage-active-memory={{ mul .Values.server.storageActiveMemory 1 }}
+            {{- if .Values.server.otlpAddress }}
+            - --otlp-address={{ .Values.server.otlpAddress }}
+            {{- end }}
           livenessProbe:
             exec:
               command:
@@ -59,6 +62,10 @@ spec:
               - -v
               - -addr=:7070
             initialDelaySeconds: 10
+          env:
+            {{- with .Values.server.extraEnv }}
+              {{- toYaml . | nindent 12 }}
+            {{- end }}
           volumeMounts:
           - mountPath: /var/parca
             name: {{ include "parca.fullname" . }}-server-config

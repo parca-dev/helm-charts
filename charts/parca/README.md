@@ -44,6 +44,7 @@ helm repo add parca https://parca-dev.github.io/helm-charts
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | agent.enabled | bool | `true` | Allows disabling parca agent |
+| agent.extraEnv | list | `[]` | Additional container environment variables for agent |
 | agent.image.pullPolicy | string | `"IfNotPresent"` | Overrides pullpolicy |
 | agent.image.repository | string | `"ghcr.io/parca-dev/parca-agent"` | Overrides the image repository |
 | agent.image.tag | string | `"v0.9.0"` | Overrides the image tag |
@@ -73,11 +74,13 @@ helm repo add parca https://parca-dev.github.io/helm-charts
 | nameOverride | string | `""` | overrides chart name |
 | server.config | object | `{"debug_info":{"bucket":{"config":{"directory":"./tmp"},"type":"FILESYSTEM"},"cache":{"config":{"directory":"./tmp"},"type":"FILESYSTEM"}}}` | parca server config block |
 | server.corsAllowedOrigins | string | `"*"` | CORS setting |
+| server.extraEnv | list | `[]` | additional container environment variables for server |
 | server.image.pullPolicy | string | `"IfNotPresent"` | Overrides pull policy for server |
 | server.image.repository | string | `"ghcr.io/parca-dev/parca"` | Overrides the image repository for server |
 | server.image.tag | string | `"v0.12.0"` | Overrides the image tag for server |
 | server.logLevel | string | `"info"` | logging level of parca server |
 | server.nodeSelector | object | `{}` | node selector for scheduling server pod |
+| server.otlpAddress | string | `""` | OpenTelemetry collector address to send traces to |
 | server.podAnnotations | object | `{}` | additional annotations for server pod |
 | server.podSecurityContext | object | `{}` | additional security context for server pod |
 | server.resources | object | `{}` | resource limits and requests for server pod |

@@ -60,6 +60,10 @@ spec:
           - containerPort: 7071
             hostPort: 7071
             name: http
+          env:
+            {{- with .Values.agent.extraEnv }}
+              {{- toYaml . | nindent 12 }}
+            {{- end }}
           volumeMounts:
           - mountPath: /tmp
             name: tmp
