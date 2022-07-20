@@ -21,6 +21,8 @@ agent:
   logLevel: info
   # -- label selector for filtering out pods with pprof, ie "parca=enabled"
   podLabelSelector: ""
+  # -- Address of parca server to send profiles. If not defined, will be generated based on deployment settings.
+  storeAddress: ""
   # -- Additional annotations for pods
   podAnnotations: {}
   # -- Additional pod secutiry context

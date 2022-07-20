@@ -59,6 +59,7 @@ helm repo add parca https://parca-dev.github.io/helm-charts
 | agent.serviceMonitor.enabled | bool | `false` | enables prometheus servicemonitor for agent |
 | agent.serviceMonitor.jobLabel | string | `"parca-agent"` |  |
 | agent.socketPath | string | `""` | Path to host docker/containerd/crio socket |
+| agent.storeAddress | string | `""` | Address of parca server to send profiles. If not defined, will be generated based on deployment settings. |
 | agent.tolerations | list | `[{"effect":"NoSchedule","operator":"Exists"},{"effect":"NoExecute","operator":"Exists"}]` | node tolerations for scheduling agent pods |
 | fullnameOverride | string | `""` | Overrides helm-generated chart fullname |
 | imagePullSecrets | list | `[]` | specifies pull secrets for image repository |
