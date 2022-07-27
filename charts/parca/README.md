@@ -1,6 +1,6 @@
 # parca
 
-![Version: 2.0.1](https://img.shields.io/badge/Version-2.0.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.12.0](https://img.shields.io/badge/AppVersion-v0.12.0-informational?style=flat-square)
+![Version: 2.1.0](https://img.shields.io/badge/Version-2.1.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.12.0](https://img.shields.io/badge/AppVersion-v0.12.0-informational?style=flat-square)
 
 Open Source Infrastructure-wide continuous profiling
 
@@ -74,6 +74,7 @@ helm repo add parca https://parca-dev.github.io/helm-charts
 | nameOverride | string | `""` | overrides chart name |
 | server.config | object | `{"debug_info":{"bucket":{"config":{"directory":"./tmp"},"type":"FILESYSTEM"},"cache":{"config":{"directory":"./tmp"},"type":"FILESYSTEM"}}}` | parca server config block |
 | server.corsAllowedOrigins | string | `"*"` | CORS setting |
+| server.enabled | bool | `true` | Allows disabling parca server |
 | server.extraEnv | list | `[]` | additional container environment variables for server |
 | server.image.pullPolicy | string | `"IfNotPresent"` | Overrides pull policy for server |
 | server.image.repository | string | `"ghcr.io/parca-dev/parca"` | Overrides the image repository for server |

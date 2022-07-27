@@ -1,3 +1,4 @@
+{{- if .Values.server.enabled -}}
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -9,3 +10,4 @@ data:
 {{ toYaml .Values.server.config | indent 4 }}
     scrape_configs:
 {{ toYaml .Values.server.scrapeConfigs | indent 4 }}
+{{- end }}
