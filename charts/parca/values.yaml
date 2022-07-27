@@ -54,6 +54,8 @@ agent:
   resources: {}
 
 server:
+  # -- Allows disabling parca server
+  enabled: true
   image:
     # -- Overrides the image repository for server
     repository: ghcr.io/parca-dev/parca
