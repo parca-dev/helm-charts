@@ -51,16 +51,15 @@ spec:
             {{- if .Values.agent.podLabelSelector }}
             - --pod-label-selector={{ .Values.agent.podLabelSelector }}
             {{- end }}
-          env:
-          - name: NODE_NAME
-            valueFrom:
-              fieldRef:
-                fieldPath: spec.nodeName
           ports:
           - containerPort: 7071
             hostPort: 7071
             name: http
           env:
+            - name: NODE_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
             {{- with .Values.agent.extraEnv }}
               {{- toYaml . | nindent 12 }}
             {{- end }}
