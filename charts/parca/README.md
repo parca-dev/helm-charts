@@ -11,6 +11,7 @@ Open Source Infrastructure-wide continuous profiling
 ### Changes
 
 #### 2.0.0
+
 In chart version 2.0.0, following things has changed:
 
 * agent.socketPath is now unset by default. If you need custom path to CRI socket (ie for k3s it is /run/containerd/containerd.sock) you will need to specify it manually now.
@@ -22,11 +23,13 @@ Please consult [official docs](https://www.parca.dev/docs/overview) on usage.
 Chart includes prometheus-style discovery rule with annotations:
 
 If you want k8s prometheus-like scraping for pprof endpoints, all you need is to add annotations for pod:
+
 ```
 parca.dev/scrape: 'true'
 ```
 
 to furter adjust scope of scraping, you can use
+
 ```
 parca.dev/port: 'debug'
 ```
@@ -44,6 +47,7 @@ helm repo add parca https://parca-dev.github.io/helm-charts
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | agent.enabled | bool | `true` | Allows disabling parca agent |
+| agent.extraArgs | list | `[]` | additional arguments for agent |
 | agent.extraEnv | list | `[]` | Additional container environment variables for agent |
 | agent.image.pullPolicy | string | `"IfNotPresent"` | Overrides pullpolicy |
 | agent.image.repository | string | `"ghcr.io/parca-dev/parca-agent"` | Overrides the image repository |
@@ -75,6 +79,7 @@ helm repo add parca https://parca-dev.github.io/helm-charts
 | server.config | object | `{"debug_info":{"bucket":{"config":{"directory":"./tmp"},"type":"FILESYSTEM"},"cache":{"config":{"directory":"./tmp"},"type":"FILESYSTEM"}}}` | parca server config block |
 | server.corsAllowedOrigins | string | `"*"` | CORS setting |
 | server.enabled | bool | `true` | Allows disabling parca server |
+| server.extraArgs | list | `[]` | additional arguments for server |
 | server.extraEnv | list | `[]` | additional container environment variables for server |
 | server.image.pullPolicy | string | `"IfNotPresent"` | Overrides pull policy for server |
 | server.image.repository | string | `"ghcr.io/parca-dev/parca"` | Overrides the image repository for server |
