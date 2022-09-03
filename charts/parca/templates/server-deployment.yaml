@@ -46,10 +46,13 @@ spec:
             {{- if .Values.server.otlpAddress }}
             - --otlp-address={{ .Values.server.otlpAddress }}
             {{- end }}
+            {{- with .Values.server.extraArgs }}
+              {{- toYaml . | nindent 12 }}
+            {{- end }}
           livenessProbe:
             exec:
               command:
-              - /grpc-health-probe
+              - /grpc_health_probe
               - -v
               - -addr=:7070
             initialDelaySeconds: 5
@@ -59,7 +62,7 @@ spec:
           readinessProbe:
             exec:
               command:
-              - /grpc-health-probe
+              - /grpc_health_probe
               - -v
               - -addr=:7070
             initialDelaySeconds: 10
