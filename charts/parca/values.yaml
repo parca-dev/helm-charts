@@ -21,6 +21,8 @@ agent:
   logLevel: info
   # -- label selector for filtering out pods with pprof, ie "parca=enabled"
   podLabelSelector: ""
+  # -- additional arguments to pass to the agent
+  extraArgs: []
   # -- Additional container environment variables for agent
   extraEnv: []
   # -- Address of parca server to send profiles. If not defined, will be generated based on deployment settings.
@@ -71,6 +73,8 @@ server:
   storageActiveMemory: 536870912
   # -- OpenTelemetry collector address to send traces to
   otlpAddress: ""
+  # -- additional arguments to pass to the server
+  extraArgs: []
   # -- additional container environment variables for server
   extraEnv: []
   # -- parca server config block
