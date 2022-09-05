@@ -177,6 +177,3 @@ ingress:
 #   targetMemoryUtilizationPercentage: 80
 
 # affinity: {}
-
-# -- nonexistent variable for check
-nonexistent: true
