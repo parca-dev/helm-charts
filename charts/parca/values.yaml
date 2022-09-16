@@ -116,6 +116,8 @@ server:
         - source_labels: [__meta_kubernetes_pod_name]
           action: replace
           target_label: kubernetes_pod_name
+  # -- allows the ability to fully override the configuration file
+  configFullyOverride: {}
   # -- additional annotations for server pod
   podAnnotations: {}
   # -- additional security context for server pod

@@ -74,6 +74,7 @@ helm repo add parca https://parca-dev.github.io/helm-charts
 | ingress.tls | list | `[]` |  |
 | nameOverride | string | `""` | overrides chart name |
 | server.config | object | `{"debug_info":{"bucket":{"config":{"directory":"./tmp"},"type":"FILESYSTEM"},"cache":{"config":{"directory":"./tmp"},"type":"FILESYSTEM"}}}` | parca server config block |
+| server.configFullyOverride | object | `{}` | allows the ability to fully override the configuration file |
 | server.corsAllowedOrigins | string | `"*"` | CORS setting |
 | server.enabled | bool | `true` | Allows disabling parca server |
 | server.extraArgs | list | `[]` | additional arguments to pass to the server |
