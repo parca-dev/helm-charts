@@ -7,7 +7,11 @@ metadata:
     {{- include "parca.labels.server" . | nindent 4 }}
 data:
   parca.yaml: |-
+{{- if .Values.server.configFullyOverride }}
+{{- toYaml .Values.server.configFullyOverride | nindent 4 }}
+{{- else }}
 {{ toYaml .Values.server.config | indent 4 }}
     scrape_configs:
 {{ toYaml .Values.server.scrapeConfigs | indent 4 }}
+{{- end }}
 {{- end }}
