@@ -1,4 +1,4 @@
-{{- if .Values.agent.enabled -}}
+{{- if and .Values.agent.enabled .Values.agent.podSecurityPolicy.enabled -}}
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
