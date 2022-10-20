@@ -64,7 +64,7 @@ server:
     # -- Overrides pull policy for server
     pullPolicy: IfNotPresent
     # -- Overrides the image tag for server
-    tag: "v0.12.1"
+    tag: "v0.13.0"
   # -- logging level of parca server
   logLevel: info
   # -- CORS setting
