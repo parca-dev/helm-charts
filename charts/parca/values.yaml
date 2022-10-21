@@ -79,15 +79,11 @@ server:
   extraEnv: []
   # -- parca server config block
   config:
-    debug_info:
+    object_storage:
       bucket:
+        type: "FILESYSTEM"
         config:
           directory: "./tmp"
-        type: FILESYSTEM
-      cache:
-        config:
-          directory: "./tmp"
-        type: FILESYSTEM
   # -- scrape configs for parca server
   scrapeConfigs:
     - job_name: 'kubernetes-pods'
