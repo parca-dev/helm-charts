@@ -1,6 +1,6 @@
 # parca
 
-![Version: 2.3.0](https://img.shields.io/badge/Version-2.3.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.13.0](https://img.shields.io/badge/AppVersion-v0.13.0-informational?style=flat-square)
+![Version: 2.3.1](https://img.shields.io/badge/Version-2.3.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.13.0](https://img.shields.io/badge/AppVersion-v0.13.0-informational?style=flat-square)
 
 Open Source Infrastructure-wide continuous profiling
 
@@ -9,6 +9,10 @@ Open Source Infrastructure-wide continuous profiling
 * <https://github.com/parca-dev/helm-charts>
 
 ### Changes
+
+#### 2.3.1
+In the chart version 2.3.1, the following has changed:
+the _server.service.annotations_ is now available, so the parca server service manifest can have additional annotations.
 
 #### 2.0.0
 In chart version 2.0.0, following things has changed:
@@ -89,6 +93,7 @@ helm repo add parca https://parca-dev.github.io/helm-charts
 | server.resources | object | `{}` | resource limits and requests for server pod |
 | server.scrapeConfigs | list | `[{"job_name":"kubernetes-pods","kubernetes_sd_configs":[{"role":"pod"}],"relabel_configs":[{"action":"keep","regex":true,"source_labels":["__meta_kubernetes_pod_annotation_parca_dev_scrape"]},{"action":"replace","regex":"(.+)","source_labels":["__meta_kubernetes_pod_annotation_parca_dev_path"],"target_label":"__metrics_path__"},{"action":"replace","regex":"([^:]+)(?::\\d+)?;(\\d+)","replacement":"$1:$2","source_labels":["__address__","__meta_kubernetes_pod_annotation_parca_dev_port"],"target_label":"__address__"},{"action":"labelmap","regex":"__meta_kubernetes_pod_label_(.+)"},{"action":"replace","source_labels":["__meta_kubernetes_namespace"],"target_label":"kubernetes_namespace"},{"action":"replace","source_labels":["__meta_kubernetes_pod_name"],"target_label":"kubernetes_pod_name"}],"scrape_interval":"1m","scrape_timeout":"10s"}]` | scrape configs for parca server |
 | server.securityContext | object | `{}` | additional security context for server |
+| server.service.annotations | object | `{}` | annotations to be added for the server service |
 | server.service.port | int | `7070` | service port for server |
 | server.service.type | string | `"ClusterIP"` | service type for server |
 | server.serviceMonitor.enabled | bool | `false` | enables servicemonitor for server monitoring |

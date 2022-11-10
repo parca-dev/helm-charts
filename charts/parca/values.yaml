@@ -123,6 +123,8 @@ server:
     type: ClusterIP
     # -- service port for server
     port: 7070
+    # -- annotations to be added for the server service
+    annotations: {}
   serviceMonitor:
     # -- enables servicemonitor for server monitoring
     enabled: false
