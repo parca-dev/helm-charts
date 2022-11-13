@@ -54,6 +54,9 @@ agent:
       operator: Exists
   # -- resource limits and requests
   resources: {}
+  # -- podSecurityPolicy for agent
+  podSecurityPolicy:
+    enabled: true
 
 server:
   # -- Allows disabling parca server
