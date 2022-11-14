@@ -10,6 +10,12 @@ Open Source Infrastructure-wide continuous profiling
 
 ### Changes
 
+#### 3.0.0
+
+In chart version 3.0.0, the following has changed:
+
+* The PodSecurityPolicy for the agents is now disabled by default as PSPs are removed with Kubernetes 1.25. Use `agent.enablePsp: true` if you want to keep it.
+
 #### 2.3.1
 In the chart version 2.3.1, the following has changed:
 the _server.service.annotations_ is now available, so the parca server service manifest can have additional annotations.
