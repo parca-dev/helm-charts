@@ -8,6 +8,10 @@ fullnameOverride: ""
 agent:
   # -- Allows disabling parca agent
   enabled: true
+
+  # -- If the PodSecurityPolicy should be enabled
+  enablePsp: false
+
   image:
     # -- Overrides the image repository
     repository: ghcr.io/parca-dev/parca-agent

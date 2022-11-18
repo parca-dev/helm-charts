@@ -1,6 +1,6 @@
 # parca
 
-![Version: 2.3.1](https://img.shields.io/badge/Version-2.3.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.13.0](https://img.shields.io/badge/AppVersion-v0.13.0-informational?style=flat-square)
+![Version: 3.0.0](https://img.shields.io/badge/Version-3.0.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.13.0](https://img.shields.io/badge/AppVersion-v0.13.0-informational?style=flat-square)
 
 Open Source Infrastructure-wide continuous profiling
 
@@ -9,6 +9,12 @@ Open Source Infrastructure-wide continuous profiling
 * <https://github.com/parca-dev/helm-charts>
 
 ### Changes
+
+#### 3.0.0
+
+In chart version 3.0.0, the following has changed:
+
+* The PodSecurityPolicy for the agents is now disabled by default as PSPs are removed with Kubernetes 1.25. Use `agent.enablePsp: true` if you want to keep it.
 
 #### 2.3.1
 In the chart version 2.3.1, the following has changed:
@@ -47,6 +53,7 @@ helm repo add parca https://parca-dev.github.io/helm-charts
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
+| agent.enablePsp | bool | `false` | If the PodSecurityPolicy should be enabled |
 | agent.enabled | bool | `true` | Allows disabling parca agent |
 | agent.extraArgs | list | `[]` | additional arguments to pass to the agent |
 | agent.extraEnv | list | `[]` | Additional container environment variables for agent |
