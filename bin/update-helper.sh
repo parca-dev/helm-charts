@@ -71,7 +71,7 @@ target_version=$(semver_increment ${current_version} ${patchlevel})
 #patch it around
 sedlink -i "s/^version:.*$/version: ${target_version}/g" charts/${chart}/Chart.yaml
 #extract image version from values (multiple different images not supported)
-appversion=$(grep "tag:" charts/coroot/values.yaml | awk {'print $2'} | tr -d '"')
+appversion=$(grep "tag:" charts/${chart}/values.yaml | awk {'print $2'} | tr -d '"'| tail -n 1)
 #patch it around
 sedlink -i "s/^appVersion:.*$/appVersion: ${appversion}/g" charts/${chart}/Chart.yaml
 #regenerate docs
