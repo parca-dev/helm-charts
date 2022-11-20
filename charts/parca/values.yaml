@@ -18,19 +18,15 @@ agent:
     # -- Overrides pullpolicy
     pullPolicy: IfNotPresent
     # -- Overrides the image tag
-    tag: "v0.9.1"
-  # -- Path to host docker/containerd/crio socket
-  socketPath: ""
+    tag: "v0.10.0"
   # -- Agent log level
   logLevel: info
-  # -- label selector for filtering out pods with pprof, ie "parca=enabled"
-  podLabelSelector: ""
   # -- additional arguments to pass to the agent
   extraArgs: []
   # -- Additional container environment variables for agent
   extraEnv: []
   # -- Address of parca server to send profiles. If not defined, will be generated based on deployment settings.
-  storeAddress: ""
+  remoteStoreAddress: ""
   # -- Additional annotations for pods
   podAnnotations: {}
   # -- Additional pod secutiry context
