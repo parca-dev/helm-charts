@@ -18,7 +18,7 @@ agent:
     # -- Overrides pullpolicy
     pullPolicy: IfNotPresent
     # -- Overrides the image tag
-    tag: "v0.9.1"
+    tag: "v0.10.0"
   # -- Path to host docker/containerd/crio socket
   socketPath: ""
   # -- Agent log level
