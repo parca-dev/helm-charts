@@ -81,6 +81,9 @@ server:
   extraArgs: []
   # -- additional container environment variables for server
   extraEnv: []
+  # -- restart the server pod when `server.config` or `server.scrapeConfigs` changes. If this is `false`, the parca server
+  # will reload the config once the mounted ConfigMap is updated, which has a delay that depends on your cluster configuration.
+  restartOnConfigChange: true
   # -- parca server config block
   config:
     object_storage:

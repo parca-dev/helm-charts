@@ -1,6 +1,6 @@
 # parca
 
-![Version: 3.2.0](https://img.shields.io/badge/Version-3.2.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.14.0](https://img.shields.io/badge/AppVersion-0.14.0-informational?style=flat-square)
+![Version: 3.3.0](https://img.shields.io/badge/Version-3.3.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.14.0](https://img.shields.io/badge/AppVersion-0.14.0-informational?style=flat-square)
 
 Open Source Infrastructure-wide continuous profiling
 
@@ -98,6 +98,7 @@ helm repo add parca https://parca-dev.github.io/helm-charts
 | server.podAnnotations | object | `{}` | additional annotations for server pod |
 | server.podSecurityContext | object | `{}` | additional security context for server pod |
 | server.resources | object | `{}` | resource limits and requests for server pod |
+| server.restartOnConfigChange | bool | `true` | restart the server pod when `server.config` or `server.scrapeConfigs` changes. If this is `false`, the parca server will reload the config once the mounted ConfigMap is updated, which has a delay that depends on your cluster configuration. |
 | server.scrapeConfigs | list | `[{"job_name":"kubernetes-pods","kubernetes_sd_configs":[{"role":"pod"}],"relabel_configs":[{"action":"keep","regex":true,"source_labels":["__meta_kubernetes_pod_annotation_parca_dev_scrape"]},{"action":"replace","regex":"(.+)","source_labels":["__meta_kubernetes_pod_annotation_parca_dev_path"],"target_label":"__metrics_path__"},{"action":"replace","regex":"([^:]+)(?::\\d+)?;(\\d+)","replacement":"$1:$2","source_labels":["__address__","__meta_kubernetes_pod_annotation_parca_dev_port"],"target_label":"__address__"},{"action":"labelmap","regex":"__meta_kubernetes_pod_label_(.+)"},{"action":"replace","source_labels":["__meta_kubernetes_namespace"],"target_label":"kubernetes_namespace"},{"action":"replace","source_labels":["__meta_kubernetes_pod_name"],"target_label":"kubernetes_pod_name"}],"scrape_interval":"1m","scrape_timeout":"10s"}]` | scrape configs for parca server |
 | server.securityContext | object | `{}` | additional security context for server |
 | server.service.annotations | object | `{}` | annotations to be added for the server service |
