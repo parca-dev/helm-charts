@@ -67,7 +67,7 @@ helm repo add parca https://parca-dev.github.io/helm-charts
 | agent.extraEnv | list | `[]` | Additional container environment variables for agent |
 | agent.image.pullPolicy | string | `"IfNotPresent"` | Overrides pullpolicy |
 | agent.image.repository | string | `"ghcr.io/parca-dev/parca-agent"` | Overrides the image repository |
-| agent.image.tag | string | `"v0.10.0"` | Overrides the image tag |
+| agent.image.tag | string | `"v0.10.1"` | Overrides the image tag |
 | agent.logLevel | string | `"info"` | Agent log level |
 | agent.nodeSelector | object | `{}` | node selector for scheduling agent pods |
 | agent.podAnnotations | object | `{}` | Additional annotations for pods |
