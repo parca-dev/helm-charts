@@ -1,6 +1,6 @@
 # parca
 
-![Version: 3.2.0](https://img.shields.io/badge/Version-3.2.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.14.0](https://img.shields.io/badge/AppVersion-0.14.0-informational?style=flat-square)
+![Version: 4.0.0](https://img.shields.io/badge/Version-4.0.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.14.0](https://img.shields.io/badge/AppVersion-0.14.0-informational?style=flat-square)
 
 Open Source Infrastructure-wide continuous profiling
 
@@ -9,6 +9,14 @@ Open Source Infrastructure-wide continuous profiling
 * <https://github.com/parca-dev/helm-charts>
 
 ### Changes
+
+#### 4.0.0
+
+The chart now supports parca-agent 0.10.0. Older versions of parca-agent are no longer supported.
+
+* `agent.storeAddress` is renamed to `agent.remoteStoreAddress`.
+* `agent.socketPath` has been removed as it is no longer supported by parca-agent
+* `agent.podLabelSelector` has been removed as it is no longer supported by parca-agent
 
 #### 3.0.0
 
@@ -59,20 +67,18 @@ helm repo add parca https://parca-dev.github.io/helm-charts
 | agent.extraEnv | list | `[]` | Additional container environment variables for agent |
 | agent.image.pullPolicy | string | `"IfNotPresent"` | Overrides pullpolicy |
 | agent.image.repository | string | `"ghcr.io/parca-dev/parca-agent"` | Overrides the image repository |
-| agent.image.tag | string | `"v0.9.1"` | Overrides the image tag |
+| agent.image.tag | string | `"v0.10.1"` | Overrides the image tag |
 | agent.logLevel | string | `"info"` | Agent log level |
 | agent.nodeSelector | object | `{}` | node selector for scheduling agent pods |
 | agent.podAnnotations | object | `{}` | Additional annotations for pods |
-| agent.podLabelSelector | string | `""` | label selector for filtering out pods with pprof, ie "parca=enabled" |
 | agent.podSecurityContext | object | `{}` | Additional pod secutiry context |
+| agent.remoteStoreAddress | string | `""` | Address of parca server to send profiles. If not defined, will be generated based on deployment settings. |
 | agent.resources | object | `{}` | resource limits and requests |
 | agent.securityContext | object | `{"privileged":true,"readOnlyRootFilesystem":true}` | Security context, needs to be prilileged for ful functionality |
 | agent.service.port | int | `7071` | service port for agent |
 | agent.service.type | string | `"ClusterIP"` | service type for agent |
 | agent.serviceMonitor.enabled | bool | `false` | enables prometheus servicemonitor for agent |
 | agent.serviceMonitor.jobLabel | string | `"parca-agent"` |  |
-| agent.socketPath | string | `""` | Path to host docker/containerd/crio socket |
-| agent.storeAddress | string | `""` | Address of parca server to send profiles. If not defined, will be generated based on deployment settings. |
 | agent.tolerations | list | `[{"effect":"NoSchedule","operator":"Exists"},{"effect":"NoExecute","operator":"Exists"}]` | node tolerations for scheduling agent pods |
 | fullnameOverride | string | `""` | Overrides helm-generated chart fullname |
 | imagePullSecrets | list | `[]` | specifies pull secrets for image repository |

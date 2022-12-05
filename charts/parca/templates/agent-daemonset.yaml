@@ -36,21 +36,13 @@ spec:
             - /bin/parca-agent
             - --log-level={{ .Values.agent.logLevel }}
             - --node=$(NODE_NAME)
-            - --kubernetes
-            {{- if .Values.agent.storeAddress }}
-            - --store-address={{ .Values.agent.storeAddress }}
+            {{- if .Values.agent.remoteStoreAddress }}
+            - --remote-store-address={{ .Values.agent.remoteStoreAddress }}
             {{- else }}
-            - --store-address={{ include "parca.fullname" . }}-server.{{ .Release.Namespace }}.svc.cluster.local:7070
+            - --remote-store-address={{ include "parca.fullname" . }}-server.{{ .Release.Namespace }}.svc.cluster.local:7070
             {{- end }}
-            - --insecure
-            - --insecure-skip-verify
-            - --temp-dir=/tmp
-            {{- if .Values.agent.socketPath }}
-            - --socket-path={{ .Values.agent.socketPath }}
-            {{- end }}
-            {{- if .Values.agent.podLabelSelector }}
-            - --pod-label-selector={{ .Values.agent.podLabelSelector }}
-            {{- end }}
+            - --remote-store-insecure
+            - --remote-store-insecure-skip-verify
             {{- with .Values.agent.extraArgs }}
               {{- toYaml . | nindent 12 }}
             {{- end }}
