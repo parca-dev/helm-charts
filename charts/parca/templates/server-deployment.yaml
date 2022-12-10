@@ -47,6 +47,9 @@ spec:
             {{- if .Values.server.otlpAddress }}
             - --otlp-address={{ .Values.server.otlpAddress }}
             {{- end }}
+            {{- if .Values.server.persistence.enabled }}
+            - --enable-persistence
+            {{- end }}
             {{- with .Values.server.extraArgs }}
               {{- toYaml . | nindent 12 }}
             {{- end }}

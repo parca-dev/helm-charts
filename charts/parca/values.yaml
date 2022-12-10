@@ -135,6 +135,9 @@ server:
   tolerations: {}
   # -- resource limits and requests for server pod
   resources: {}
+  persistence:
+    # -- turn on persistent storage for the metastore and profile storage.
+    enabled: false
 
 serviceAccount:
   # -- Specifies whether a service account should be created
