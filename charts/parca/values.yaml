@@ -138,6 +138,8 @@ server:
   persistence:
     # -- turn on persistent storage for the metastore and profile storage. A StefulSet will be used
     enabled: false
+    # -- use a existing PVC which must be created manually before bound
+    existingClaim: ""
 
 serviceAccount:
   # -- Specifies whether a service account should be created

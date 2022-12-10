@@ -90,7 +90,12 @@ spec:
       {{- if .Values.server.persistence.enabled }}
       - name: data
         mountPath: /data
+        {{- if .Values.server.persistence.existingClaim }}
+        persistentVolumeClaim:
+          claimName: {{ printf "%s" (tpl .Values.server.persistence.existingClaim .) }}
+        {{- else }}
         emptyDir: {}
+        {{- end }}
       {{- end }}
       {{- with .Values.server.nodeSelector }}
       nodeSelector:
