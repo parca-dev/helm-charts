@@ -136,7 +136,7 @@ server:
   # -- resource limits and requests for server pod
   resources: {}
   persistence:
-    # -- turn on persistent storage for the metastore and profile storage.
+    # -- turn on persistent storage for the metastore and profile storage. A StefulSet will be used
     enabled: false
 
 serviceAccount:

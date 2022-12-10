@@ -1,6 +1,6 @@
 {{- if .Values.server.enabled -}}
 apiVersion: apps/v1
-kind: Deployment
+kind: {{ ternary "StatefulSet" "Deployment" .Values.server.persistence.enabled }}
 metadata:
   name: {{ include "parca.fullname" . }}
   labels:
@@ -14,6 +14,9 @@ spec:
   selector:
     matchLabels:
       {{- include "parca.selectorLabels.server" . | nindent 6 }}
+  {{- if .Values.server.persistence.enabled }}
+  serviceName: {{ include "parca.fullname" . }}-server
+  {{- end }}
   template:
     metadata:
       annotations:
