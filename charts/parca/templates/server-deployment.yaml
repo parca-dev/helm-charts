@@ -87,15 +87,10 @@ spec:
       - configMap:
           name: {{ include "parca.fullname" . }}-server-config
         name: {{ include "parca.fullname" . }}-server-config
-      {{- if .Values.server.persistence.enabled }}
+      {{- if and .Values.server.persistence.enabled .Values.server.persistence.existingClaim }}
       - name: data
-        mountPath: /data
-        {{- if .Values.server.persistence.existingClaim }}
         persistentVolumeClaim:
           claimName: {{ printf "%s" (tpl .Values.server.persistence.existingClaim .) }}
-        {{- else }}
-        emptyDir: {}
-        {{- end }}
       {{- end }}
       {{- with .Values.server.nodeSelector }}
       nodeSelector:
@@ -109,4 +104,17 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+  {{- if and .Values.server.persistence.enabled (not .Values.server.persistence.existingClaim) }}
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+        labels:
+          {{- include "parca.labels.server" . | nindent 10 }}
+      spec:
+        accessModes:
+          - "ReadWriteOnce"
+        resources:
+          requests:
+            storage: {{ .Values.server.persistence.size | quote }}
+  {{- end }}
 {{- end }}

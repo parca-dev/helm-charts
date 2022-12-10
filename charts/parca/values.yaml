@@ -140,6 +140,8 @@ server:
     enabled: false
     # -- use a existing PVC which must be created manually before bound
     existingClaim: ""
+    # -- PVC size
+    size: 8Gi
 
 serviceAccount:
   # -- Specifies whether a service account should be created
