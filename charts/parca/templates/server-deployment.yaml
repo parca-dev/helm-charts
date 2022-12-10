@@ -49,6 +49,7 @@ spec:
             {{- end }}
             {{- if .Values.server.persistence.enabled }}
             - --enable-persistence
+            - --storage-path=/data
             {{- end }}
             {{- with .Values.server.extraArgs }}
               {{- toYaml . | nindent 12 }}
@@ -83,6 +84,11 @@ spec:
       - configMap:
           name: {{ include "parca.fullname" . }}-server-config
         name: {{ include "parca.fullname" . }}-server-config
+      {{- if .Values.server.persistence.enabled }}
+      - name: data
+        mountPath: /data
+        emptyDir: {}
+      {{- end }}
       {{- with .Values.server.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
