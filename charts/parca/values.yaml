@@ -144,6 +144,9 @@ server:
     existingClaim: ""
     # -- PVC size
     size: 8Gi
+    # -- storage class
+    storageClassName: ""
+
 
 serviceAccount:
   # -- Specifies whether a service account should be created

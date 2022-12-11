@@ -115,6 +115,9 @@ spec:
         labels:
           {{- include "parca.labels.server" . | nindent 10 }}
       spec:
+        {{- if .Values.server.persistence.storageClassName }}
+        storageClassName: {{ .Values.server.persistence.storageClassName }}
+        {{- end }}
         accessModes:
           - "ReadWriteOnce"
         resources:
