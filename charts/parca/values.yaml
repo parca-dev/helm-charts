@@ -31,7 +31,7 @@ agent:
   podAnnotations: {}
   # -- Additional pod secutiry context
   podSecurityContext: {}
-  # -- Security context, needs to be prilileged for ful functionality
+  # -- Security context, needs to be prilileged for full functionality
   securityContext:
     privileged: true
     readOnlyRootFilesystem: true

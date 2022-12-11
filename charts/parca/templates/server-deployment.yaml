@@ -81,6 +81,10 @@ spec:
           volumeMounts:
           - mountPath: /var/parca
             name: {{ include "parca.fullname" . }}-server-config
+          {{- if .Values.server.persistence.enabled }}
+          - mountPath: /data
+            name: data
+          {{- end }}
           resources:
             {{- toYaml .Values.server.resources | nindent 12 }}
       volumes:
