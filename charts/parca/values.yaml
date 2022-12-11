@@ -115,7 +115,9 @@ server:
   # -- additional annotations for server pod
   podAnnotations: {}
   # -- additional security context for server pod
-  podSecurityContext: {}
+  podSecurityContext:
+    fsGroup: 65534
+    fsGroupChangePolicy: "OnRootMismatch"
   # -- additional security context for server
   securityContext: {}
   service:
