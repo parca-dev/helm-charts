@@ -74,7 +74,7 @@ helm repo add parca https://parca-dev.github.io/helm-charts
 | agent.podSecurityContext | object | `{}` | Additional pod secutiry context |
 | agent.remoteStoreAddress | string | `""` | Address of parca server to send profiles. If not defined, will be generated based on deployment settings. |
 | agent.resources | object | `{}` | resource limits and requests |
-| agent.securityContext | object | `{"privileged":true,"readOnlyRootFilesystem":true}` | Security context, needs to be prilileged for ful functionality |
+| agent.securityContext | object | `{"privileged":true,"readOnlyRootFilesystem":true}` | Security context, needs to be prilileged for full functionality |
 | agent.service.port | int | `7071` | service port for agent |
 | agent.service.type | string | `"ClusterIP"` | service type for agent |
 | agent.serviceMonitor.enabled | bool | `false` | enables prometheus servicemonitor for agent |
@@ -101,8 +101,12 @@ helm repo add parca https://parca-dev.github.io/helm-charts
 | server.logLevel | string | `"info"` | logging level of parca server |
 | server.nodeSelector | object | `{}` | node selector for scheduling server pod |
 | server.otlpAddress | string | `""` | OpenTelemetry collector address to send traces to |
+| server.persistence.enabled | bool | `false` | turn on persistent storage for the metastore and profile storage. A StefulSet will be used |
+| server.persistence.existingClaim | string | `""` | use a existing PVC which must be created manually before bound |
+| server.persistence.size | string | `"8Gi"` | PVC size |
+| server.persistence.storageClassName | string | `""` | storage class |
 | server.podAnnotations | object | `{}` | additional annotations for server pod |
-| server.podSecurityContext | object | `{}` | additional security context for server pod |
+| server.podSecurityContext | object | `{"fsGroup":65534,"fsGroupChangePolicy":"OnRootMismatch"}` | additional security context for server pod |
 | server.resources | object | `{}` | resource limits and requests for server pod |
 | server.scrapeConfigs | list | `[{"job_name":"kubernetes-pods","kubernetes_sd_configs":[{"role":"pod"}],"relabel_configs":[{"action":"keep","regex":true,"source_labels":["__meta_kubernetes_pod_annotation_parca_dev_scrape"]},{"action":"replace","regex":"(.+)","source_labels":["__meta_kubernetes_pod_annotation_parca_dev_path"],"target_label":"__metrics_path__"},{"action":"replace","regex":"([^:]+)(?::\\d+)?;(\\d+)","replacement":"$1:$2","source_labels":["__address__","__meta_kubernetes_pod_annotation_parca_dev_port"],"target_label":"__address__"},{"action":"labelmap","regex":"__meta_kubernetes_pod_label_(.+)"},{"action":"replace","source_labels":["__meta_kubernetes_namespace"],"target_label":"kubernetes_namespace"},{"action":"replace","source_labels":["__meta_kubernetes_pod_name"],"target_label":"kubernetes_pod_name"}],"scrape_interval":"1m","scrape_timeout":"10s"}]` | scrape configs for parca server |
 | server.securityContext | object | `{}` | additional security context for server |
