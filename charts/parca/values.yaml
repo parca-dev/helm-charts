@@ -18,7 +18,7 @@ agent:
     # -- Overrides pullpolicy
     pullPolicy: IfNotPresent
     # -- Overrides the image tag
-    tag: "v0.10.1"
+    tag: "v0.11.0"
   # -- Agent log level
   logLevel: info
   # -- additional arguments to pass to the agent
@@ -27,6 +27,9 @@ agent:
   extraEnv: []
   # -- Address of parca server to send profiles. If not defined, will be generated based on deployment settings.
   remoteStoreAddress: ""
+  remoteStoreInsecure: true
+  remoteStoreInsecureSkipVerify: true
+  remoteStoreBearerToken: ""
   # -- Additional annotations for pods
   podAnnotations: {}
   # -- Additional pod secutiry context
@@ -64,7 +67,7 @@ server:
     # -- Overrides pull policy for server
     pullPolicy: IfNotPresent
     # -- Overrides the image tag for server
-    tag: "v0.14.0"
+    tag: "v0.15.0"
   # -- logging level of parca server
   logLevel: info
   # -- CORS setting

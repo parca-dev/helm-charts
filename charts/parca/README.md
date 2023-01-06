@@ -67,12 +67,15 @@ helm repo add parca https://parca-dev.github.io/helm-charts
 | agent.extraEnv | list | `[]` | Additional container environment variables for agent |
 | agent.image.pullPolicy | string | `"IfNotPresent"` | Overrides pullpolicy |
 | agent.image.repository | string | `"ghcr.io/parca-dev/parca-agent"` | Overrides the image repository |
-| agent.image.tag | string | `"v0.10.1"` | Overrides the image tag |
+| agent.image.tag | string | `"v0.11.0"` | Overrides the image tag |
 | agent.logLevel | string | `"info"` | Agent log level |
 | agent.nodeSelector | object | `{}` | node selector for scheduling agent pods |
 | agent.podAnnotations | object | `{}` | Additional annotations for pods |
 | agent.podSecurityContext | object | `{}` | Additional pod secutiry context |
 | agent.remoteStoreAddress | string | `""` | Address of parca server to send profiles. If not defined, will be generated based on deployment settings. |
+| agent.remoteStoreBearerToken | string | `""` |  |
+| agent.remoteStoreInsecure | bool | `true` |  |
+| agent.remoteStoreInsecureSkipVerify | bool | `true` |  |
 | agent.resources | object | `{}` | resource limits and requests |
 | agent.securityContext | object | `{"privileged":true,"readOnlyRootFilesystem":true}` | Security context, needs to be prilileged for ful functionality |
 | agent.service.port | int | `7071` | service port for agent |
@@ -97,7 +100,7 @@ helm repo add parca https://parca-dev.github.io/helm-charts
 | server.extraEnv | list | `[]` | additional container environment variables for server |
 | server.image.pullPolicy | string | `"IfNotPresent"` | Overrides pull policy for server |
 | server.image.repository | string | `"ghcr.io/parca-dev/parca"` | Overrides the image repository for server |
-| server.image.tag | string | `"v0.14.0"` | Overrides the image tag for server |
+| server.image.tag | string | `"v0.15.0"` | Overrides the image tag for server |
 | server.logLevel | string | `"info"` | logging level of parca server |
 | server.nodeSelector | object | `{}` | node selector for scheduling server pod |
 | server.otlpAddress | string | `""` | OpenTelemetry collector address to send traces to |
