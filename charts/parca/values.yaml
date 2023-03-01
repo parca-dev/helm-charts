@@ -9,6 +9,10 @@ agent:
   # -- Allows disabling parca agent
   enabled: true
 
+  # -- parca agent config block
+  config:
+    relabel_configs:
+
   # -- If the PodSecurityPolicy should be enabled
   enablePsp: false
 
@@ -18,7 +22,7 @@ agent:
     # -- Overrides pullpolicy
     pullPolicy: IfNotPresent
     # -- Overrides the image tag
-    tag: "v0.10.1"
+    tag: "v0.13.0"
   # -- Agent log level
   logLevel: info
   # -- additional arguments to pass to the agent
@@ -27,6 +31,9 @@ agent:
   extraEnv: []
   # -- Address of parca server to send profiles. If not defined, will be generated based on deployment settings.
   remoteStoreAddress: ""
+  remoteStoreInsecure: true
+  remoteStoreInsecureSkipVerify: true
+  remoteStoreBearerToken: ""
   # -- Additional annotations for pods
   podAnnotations: {}
   # -- Additional pod secutiry context
@@ -64,7 +71,7 @@ server:
     # -- Overrides pull policy for server
     pullPolicy: IfNotPresent
     # -- Overrides the image tag for server
-    tag: "v0.14.0"
+    tag: "v0.15.0"
   # -- logging level of parca server
   logLevel: info
   # -- CORS setting
@@ -77,6 +84,9 @@ server:
   extraArgs: []
   # -- additional container environment variables for server
   extraEnv: []
+  # -- restart the server pod when `server.config` or `server.scrapeConfigs` changes. If this is `false`, the parca server
+  # will reload the config once the mounted ConfigMap is updated, which has a delay that depends on your cluster configuration.
+  restartOnConfigChange: true
   # -- parca server config block
   config:
     object_storage:
@@ -88,7 +98,6 @@ server:
   scrapeConfigs:
     - job_name: 'kubernetes-pods'
       scrape_interval: 1m
-      scrape_timeout: 10s
       kubernetes_sd_configs:
         - role: pod
       relabel_configs:

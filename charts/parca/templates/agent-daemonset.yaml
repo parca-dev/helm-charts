@@ -36,13 +36,21 @@ spec:
             - /bin/parca-agent
             - --log-level={{ .Values.agent.logLevel }}
             - --node=$(NODE_NAME)
+            - --config-path=/var/parca/parca-agent.yaml
             {{- if .Values.agent.remoteStoreAddress }}
             - --remote-store-address={{ .Values.agent.remoteStoreAddress }}
             {{- else }}
             - --remote-store-address={{ include "parca.fullname" . }}-server.{{ .Release.Namespace }}.svc.cluster.local:7070
             {{- end }}
+            {{- if .Values.agent.remoteStoreInsecure }}
             - --remote-store-insecure
+            {{- end }}
+            {{- if .Values.agent.remoteStoreInsecureSkipVerify }}
             - --remote-store-insecure-skip-verify
+            {{- end }}
+            {{- if .Values.agent.remoteStoreBearerToken }}
+            - --remote-store-bearer-token-file=/var/parca-agent-remote-store-bearer-token/token
+            {{- end }}
             {{- with .Values.agent.extraArgs }}
               {{- toYaml . | nindent 12 }}
             {{- end }}
@@ -71,6 +79,12 @@ spec:
             name: cgroup
           - mountPath: /sys/fs/bpf
             name: bpffs
+          - mountPath: /var/parca
+            name: {{ include "parca.fullname" . }}-agent-config
+          {{- if .Values.agent.remoteStoreBearerToken }}
+          - mountPath: /var/parca-agent-remote-store-bearer-token
+            name: parca-agent-remote-store-bearer-token
+          {{- end }}
           resources:
             {{- toYaml .Values.agent.resources | nindent 12 }}
       hostPID: true
@@ -92,6 +106,14 @@ spec:
       - hostPath:
           path: /sys/kernel/debug
         name: debugfs
+      - configMap:
+          name: {{ include "parca.fullname" . }}-agent-config
+        name: {{ include "parca.fullname" . }}-agent-config
+      {{- if .Values.agent.remoteStoreBearerToken }}
+      - name: parca-agent-remote-store-bearer-token
+        secret:
+          secretName: parca-agent-remote-store-bearer-token
+      {{- end }}
       {{- with .Values.agent.tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}

@@ -61,18 +61,22 @@ helm repo add parca https://parca-dev.github.io/helm-charts
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
+| agent.config | object | `{"relabel_configs":null}` | parca agent config block |
 | agent.enablePsp | bool | `false` | If the PodSecurityPolicy should be enabled |
 | agent.enabled | bool | `true` | Allows disabling parca agent |
 | agent.extraArgs | list | `[]` | additional arguments to pass to the agent |
 | agent.extraEnv | list | `[]` | Additional container environment variables for agent |
 | agent.image.pullPolicy | string | `"IfNotPresent"` | Overrides pullpolicy |
 | agent.image.repository | string | `"ghcr.io/parca-dev/parca-agent"` | Overrides the image repository |
-| agent.image.tag | string | `"v0.10.1"` | Overrides the image tag |
+| agent.image.tag | string | `"v0.13.0"` | Overrides the image tag |
 | agent.logLevel | string | `"info"` | Agent log level |
 | agent.nodeSelector | object | `{}` | node selector for scheduling agent pods |
 | agent.podAnnotations | object | `{}` | Additional annotations for pods |
 | agent.podSecurityContext | object | `{}` | Additional pod secutiry context |
 | agent.remoteStoreAddress | string | `""` | Address of parca server to send profiles. If not defined, will be generated based on deployment settings. |
+| agent.remoteStoreBearerToken | string | `""` |  |
+| agent.remoteStoreInsecure | bool | `true` |  |
+| agent.remoteStoreInsecureSkipVerify | bool | `true` |  |
 | agent.resources | object | `{}` | resource limits and requests |
 | agent.securityContext | object | `{"privileged":true,"readOnlyRootFilesystem":true}` | Security context, needs to be prilileged for ful functionality |
 | agent.service.port | int | `7071` | service port for agent |
@@ -97,7 +101,7 @@ helm repo add parca https://parca-dev.github.io/helm-charts
 | server.extraEnv | list | `[]` | additional container environment variables for server |
 | server.image.pullPolicy | string | `"IfNotPresent"` | Overrides pull policy for server |
 | server.image.repository | string | `"ghcr.io/parca-dev/parca"` | Overrides the image repository for server |
-| server.image.tag | string | `"v0.14.0"` | Overrides the image tag for server |
+| server.image.tag | string | `"v0.15.0"` | Overrides the image tag for server |
 | server.logLevel | string | `"info"` | logging level of parca server |
 | server.nodeSelector | object | `{}` | node selector for scheduling server pod |
 | server.otlpAddress | string | `""` | OpenTelemetry collector address to send traces to |
@@ -105,7 +109,8 @@ helm repo add parca https://parca-dev.github.io/helm-charts
 | server.podSecurityContext | object | `{}` | additional security context for server pod |
 | server.rbac | object | `{"create":true}` | clusterrole and binding for kubernetes service discovery mechanism |
 | server.resources | object | `{}` | resource limits and requests for server pod |
-| server.scrapeConfigs | list | `[{"job_name":"kubernetes-pods","kubernetes_sd_configs":[{"role":"pod"}],"relabel_configs":[{"action":"keep","regex":true,"source_labels":["__meta_kubernetes_pod_annotation_parca_dev_scrape"]},{"action":"replace","regex":"(.+)","source_labels":["__meta_kubernetes_pod_annotation_parca_dev_path"],"target_label":"__metrics_path__"},{"action":"replace","regex":"([^:]+)(?::\\d+)?;(\\d+)","replacement":"$1:$2","source_labels":["__address__","__meta_kubernetes_pod_annotation_parca_dev_port"],"target_label":"__address__"},{"action":"labelmap","regex":"__meta_kubernetes_pod_label_(.+)"},{"action":"replace","source_labels":["__meta_kubernetes_namespace"],"target_label":"kubernetes_namespace"},{"action":"replace","source_labels":["__meta_kubernetes_pod_name"],"target_label":"kubernetes_pod_name"}],"scrape_interval":"1m","scrape_timeout":"10s"}]` | scrape configs for parca server |
+| server.restartOnConfigChange | bool | `true` | restart the server pod when `server.config` or `server.scrapeConfigs` changes. If this is `false`, the parca server will reload the config once the mounted ConfigMap is updated, which has a delay that depends on your cluster configuration. |
+| server.scrapeConfigs | list | `[{"job_name":"kubernetes-pods","kubernetes_sd_configs":[{"role":"pod"}],"relabel_configs":[{"action":"keep","regex":true,"source_labels":["__meta_kubernetes_pod_annotation_parca_dev_scrape"]},{"action":"replace","regex":"(.+)","source_labels":["__meta_kubernetes_pod_annotation_parca_dev_path"],"target_label":"__metrics_path__"},{"action":"replace","regex":"([^:]+)(?::\\d+)?;(\\d+)","replacement":"$1:$2","source_labels":["__address__","__meta_kubernetes_pod_annotation_parca_dev_port"],"target_label":"__address__"},{"action":"labelmap","regex":"__meta_kubernetes_pod_label_(.+)"},{"action":"replace","source_labels":["__meta_kubernetes_namespace"],"target_label":"kubernetes_namespace"},{"action":"replace","source_labels":["__meta_kubernetes_pod_name"],"target_label":"kubernetes_pod_name"}],"scrape_interval":"1m"}]` | scrape configs for parca server |
 | server.securityContext | object | `{}` | additional security context for server |
 | server.service.annotations | object | `{}` | annotations to be added for the server service |
 | server.service.port | int | `7070` | service port for server |

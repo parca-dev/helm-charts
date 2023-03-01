@@ -16,11 +16,15 @@ spec:
       {{- include "parca.selectorLabels.server" . | nindent 6 }}
   template:
     metadata:
+      {{- if or .Values.server.podAnnotations .Values.server.restartOnConfigChange }}
       annotations:
+        {{- if .Values.server.restartOnConfigChange }}
         checksum/config: {{ include (print $.Template.BasePath "/server-configmap.yaml") . | sha256sum }}
+        {{- end }}
         {{- with .Values.server.podAnnotations }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
+      {{- end }}
       labels:
         {{- include "parca.selectorLabels.server" . | nindent 8 }}
     spec:
