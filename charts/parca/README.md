@@ -1,6 +1,6 @@
 # parca
 
-![Version: 4.1.0](https://img.shields.io/badge/Version-4.1.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.15.0](https://img.shields.io/badge/AppVersion-0.15.0-informational?style=flat-square)
+![Version: 4.2.0](https://img.shields.io/badge/Version-4.2.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.15.0](https://img.shields.io/badge/AppVersion-0.15.0-informational?style=flat-square)
 
 Open Source Infrastructure-wide continuous profiling
 
@@ -61,6 +61,7 @@ helm repo add parca https://parca-dev.github.io/helm-charts
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
+| agent.config | object | `{"relabel_configs":null}` | parca agent config block |
 | agent.enablePsp | bool | `false` | If the PodSecurityPolicy should be enabled |
 | agent.enabled | bool | `true` | Allows disabling parca agent |
 | agent.extraArgs | list | `[]` | additional arguments to pass to the agent |

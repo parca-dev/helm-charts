@@ -9,6 +9,10 @@ agent:
   # -- Allows disabling parca agent
   enabled: true
 
+  # -- parca agent config block
+  config:
+    relabel_configs:
+
   # -- If the PodSecurityPolicy should be enabled
   enablePsp: false
 
