@@ -61,6 +61,7 @@ helm repo add parca https://parca-dev.github.io/helm-charts
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
+| agent.config | object | `{"relabel_configs":null}` | parca agent config block |
 | agent.enablePsp | bool | `false` | If the PodSecurityPolicy should be enabled |
 | agent.enabled | bool | `true` | Allows disabling parca agent |
 | agent.extraArgs | list | `[]` | additional arguments to pass to the agent |
