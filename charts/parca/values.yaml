@@ -38,7 +38,7 @@ agent:
   podAnnotations: {}
   # -- Additional pod secutiry context
   podSecurityContext: {}
-  # -- Security context, needs to be prilileged for ful functionality
+  # -- Security context, needs to be prilileged for full functionality
   securityContext:
     privileged: true
     readOnlyRootFilesystem: true
@@ -121,7 +121,9 @@ server:
   # -- additional annotations for server pod
   podAnnotations: {}
   # -- additional security context for server pod
-  podSecurityContext: {}
+  podSecurityContext:
+    fsGroup: 65534
+    fsGroupChangePolicy: "OnRootMismatch"
   # -- additional security context for server
   securityContext: {}
   service:
@@ -141,6 +143,16 @@ server:
   tolerations: {}
   # -- resource limits and requests for server pod
   resources: {}
+  persistence:
+    # -- turn on persistent storage for the metastore and profile storage. A StefulSet will be used
+    enabled: false
+    # -- use a existing PVC which must be created manually before bound
+    existingClaim: ""
+    # -- PVC size
+    size: 8Gi
+    # -- storage class
+    storageClassName: ""
+
 
 serviceAccount:
   # -- Specifies whether a service account should be created
