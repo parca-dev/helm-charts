@@ -36,20 +36,19 @@ spec:
             - /bin/parca-agent
             - --log-level={{ .Values.agent.logLevel }}
             - --node=$(NODE_NAME)
-            - --kubernetes
-            {{- if .Values.agent.storeAddress }}
-            - --store-address={{ .Values.agent.storeAddress }}
+            {{- if .Values.agent.remoteStoreAddress }}
+            - --remote-store-address={{ .Values.agent.remoteStoreAddress }}
             {{- else }}
-            - --store-address={{ include "parca.fullname" . }}-server.{{ .Release.Namespace }}.svc.cluster.local:7070
+            - --remote-store-address={{ include "parca.fullname" . }}-server.{{ .Release.Namespace }}.svc.cluster.local:7070
             {{- end }}
-            - --insecure
-            - --insecure-skip-verify
-            - --temp-dir=/tmp
-            {{- if .Values.agent.socketPath }}
-            - --socket-path={{ .Values.agent.socketPath }}
+            {{- if .Values.agent.remoteStoreInsecure }}
+            - --remote-store-insecure
             {{- end }}
-            {{- if .Values.agent.podLabelSelector }}
-            - --pod-label-selector={{ .Values.agent.podLabelSelector }}
+            {{- if .Values.agent.remoteStoreInsecureSkipVerify }}
+            - --remote-store-insecure-skip-verify
+            {{- end }}
+            {{- if .Values.agent.remoteStoreBearerToken }}
+            - --remote-store-bearer-token-file=/var/parca-agent-remote-store-bearer-token/token
             {{- end }}
             {{- with .Values.agent.extraArgs }}
               {{- toYaml . | nindent 12 }}
@@ -79,6 +78,10 @@ spec:
             name: cgroup
           - mountPath: /sys/fs/bpf
             name: bpffs
+          {{- if .Values.agent.remoteStoreBearerToken }}
+          - mountPath: /var/parca-agent-remote-store-bearer-token
+            name: parca-agent-remote-store-bearer-token
+          {{- end }}
           resources:
             {{- toYaml .Values.agent.resources | nindent 12 }}
       hostPID: true
@@ -100,6 +103,11 @@ spec:
       - hostPath:
           path: /sys/kernel/debug
         name: debugfs
+      {{- if .Values.agent.remoteStoreBearerToken }}
+      - name: parca-agent-remote-store-bearer-token
+        secret:
+          secretName: parca-agent-remote-store-bearer-token
+      {{- end }}
       {{- with .Values.agent.tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}
