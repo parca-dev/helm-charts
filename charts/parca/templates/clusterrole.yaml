@@ -1,20 +1,17 @@
+{{- if and .Values.server.enabled .Values.server.rbac.create }}
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  labels:
-    {{- include "parca.labels" . | nindent 4 }}
   name: {{ include "parca.serviceAccountName" . }}
+  labels:
+    app: {{ include "parca.serviceAccountName" . }}
+{{- include "parca.labels" . | nindent 4 }}
 rules:
-- apiGroups:
-  - ""
-  resources:
-  - pods
-  verbs:
-  - list
-  - watch
-- apiGroups:
-  - ""
+- apiGroups: [""]
   resources:
   - nodes
-  verbs:
-  - get
+  - services
+  - endpoints
+  - pods
+  verbs: ["get", "list", "watch"]
+{{- end }}

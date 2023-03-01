@@ -144,6 +144,9 @@ server:
   tolerations: {}
   # -- resource limits and requests for server pod
   resources: {}
+  # -- clusterrole and binding for kubernetes service discovery mechanism
+  rbac:
+    create: true
 
 serviceAccount:
   # -- Specifies whether a service account should be created
