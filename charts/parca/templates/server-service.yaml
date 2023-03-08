@@ -14,9 +14,6 @@ spec:
   {{- with .Values.server.service.loadBalancerIP }}
   loadBalancerIP: {{ . }}
   {{- end }}
-  {{- with .Values.server.service.loadBalancerIP }}
-  loadBalancerIP: {{ . }}
-  {{- end }}
   ports:
     - port: {{ .Values.server.service.port }}
       targetPort: 7070
