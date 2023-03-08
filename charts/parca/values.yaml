@@ -138,6 +138,8 @@ server:
   service:
     # -- service type for server
     type: ClusterIP
+    # -- load balancer static IP
+    loadBalancerIP:
     # -- service port for server
     port: 7070
     # -- annotations to be added for the server service
