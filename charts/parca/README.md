@@ -1,6 +1,6 @@
 # parca
 
-![Version: 4.8.0](https://img.shields.io/badge/Version-4.8.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.16.2](https://img.shields.io/badge/AppVersion-v0.16.2-informational?style=flat-square)
+![Version: 5.0.0](https://img.shields.io/badge/Version-5.0.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.16.2](https://img.shields.io/badge/AppVersion-v0.16.2-informational?style=flat-square)
 
 Open Source Infrastructure-wide continuous profiling
 
@@ -96,7 +96,7 @@ helm repo add parca https://parca-dev.github.io/helm-charts
 | ingress.hosts[0].paths[0].pathType | string | `"ImplementationSpecific"` |  |
 | ingress.tls | list | `[]` |  |
 | nameOverride | string | `""` | overrides chart name |
-| server.config | object | `{"object_storage":{"bucket":{"config":{"directory":"./tmp"},"type":"FILESYSTEM"}}}` | parca server config block |
+| server.config | object | `{"object_storage":{"bucket":{"config":{"directory":"/storage"},"type":"FILESYSTEM"}}}` | parca server config block |
 | server.corsAllowedOrigins | string | `"*"` | CORS setting |
 | server.enabled | bool | `true` | Allows disabling parca server |
 | server.extraArgs | list | `[]` | additional arguments to pass to the server |
@@ -108,6 +108,12 @@ helm repo add parca https://parca-dev.github.io/helm-charts
 | server.logLevel | string | `"info"` | logging level of parca server |
 | server.nodeSelector | object | `{}` | node selector for scheduling server pod |
 | server.otlpAddress | string | `""` | OpenTelemetry collector address to send traces to |
+| server.persistence | object | `{"accessModes":["ReadWriteOnce"],"capacity":"10Gi","enabled":false,"mountPath":"/storage","storageClassName":""}` | persistence for the data |
+| server.persistence.accessModes | list | `["ReadWriteOnce"]` | Modes in which the volume can be accessed: |
+| server.persistence.capacity | string | `"10Gi"` | Amount of storage to request |
+| server.persistence.enabled | bool | `false` | If persistent storage should be enabled |
+| server.persistence.mountPath | string | `"/storage"` | Where the volume is mounted. Ensure that this is identical to server.config.object_storage.bucket.config.directory |
+| server.persistence.storageClassName | string | `""` | Name of the storage class |
 | server.podAnnotations | object | `{}` | additional annotations for server pod |
 | server.podExtraLabels | object | `{}` | additional labels for server pod |
 | server.podSecurityContext | object | `{}` | additional security context for server pod |

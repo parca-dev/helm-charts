@@ -1,0 +1,14 @@
+{{- if .Values.server.persistence.enabled }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "parca.fullname" . }}
+spec:
+  {{- if .Values.server.persistence.storageClassName }}
+  storageClassName: "{{ .Values.server.persistence.storageClassName }}"
+  {{- end }}
+  resources:
+    requests:
+      storage: "{{ .Values.server.persistence.capacity }}"
+  accessModes: {{ toYaml .Values.server.persistence.accessModes | nindent 4}}
+{{- end }}

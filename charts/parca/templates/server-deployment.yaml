@@ -16,6 +16,14 @@ spec:
   replicas: {{ .Values.replicaCount }}
   {{- end }}
 */}}
+  {{- if .Values.server.persistence.enabled }}
+  {{- if (gt (.Values.server.replicaCount | int) 1) }}
+  {{- fail "You can currently only enable persistence for 1 replica since we use a Deployment + PVC." }}
+  {{- end }}
+  {{- /* Recreate is needed since parca uses directory locking for the metastore */}}
+  strategy:
+    type: Recreate
+  {{- end }}
   selector:
     matchLabels:
       {{- include "parca.selectorLabels.server" . | nindent 6 }}
@@ -88,12 +96,21 @@ spec:
           volumeMounts:
           - mountPath: /var/parca
             name: {{ include "parca.fullname" . }}-server-config
+          {{- if .Values.server.persistence }}
+          - mountPath: {{ .Values.server.persistence.mountPath }}
+            name: storage
+          {{- end }}
           resources:
             {{- toYaml .Values.server.resources | nindent 12 }}
       volumes:
       - configMap:
           name: {{ include "parca.fullname" . }}-server-config
         name: {{ include "parca.fullname" . }}-server-config
+      {{- if .Values.server.persistence }}
+      - name: storage
+        persistentVolumeClaim:
+          claimName: {{ include "parca.fullname" . }}
+      {{- end }}
       {{- with .Values.server.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

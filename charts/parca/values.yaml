@@ -93,13 +93,29 @@ server:
   # -- restart the server pod when `server.config` or `server.scrapeConfigs` changes. If this is `false`, the parca server
   # will reload the config once the mounted ConfigMap is updated, which has a delay that depends on your cluster configuration.
   restartOnConfigChange: true
+
+  # -- persistence for the data
+  persistence:
+    # -- If persistent storage should be enabled
+    enabled: false
+    # -- Amount of storage to request
+    capacity: 10Gi
+    # -- Name of the storage class
+    storageClassName: ""
+    # -- Where the volume is mounted. Ensure that this is identical to server.config.object_storage.bucket.config.directory
+    mountPath: "/storage"
+    # -- Modes in which the volume can be accessed:
+    accessModes:
+      - ReadWriteOnce
+
   # -- parca server config block
   config:
     object_storage:
       bucket:
         type: "FILESYSTEM"
         config:
-          directory: "./tmp"
+          directory: "/storage"
+
   # -- scrape configs for parca server
   scrapeConfigs:
     - job_name: 'kubernetes-pods'
