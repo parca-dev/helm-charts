@@ -46,6 +46,7 @@ spec:
             - /bin/parca-agent
             - --log-level={{ .Values.agent.logLevel }}
             - --node=$(NODE_NAME)
+            - --http-address="$(MY_POD_IP):7071"
             - --config-path=/var/parca/parca-agent.yaml
             {{- if .Values.agent.remoteStoreAddress }}
             - --remote-store-address={{ .Values.agent.remoteStoreAddress }}
@@ -73,6 +74,10 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: spec.nodeName
+            - name: MY_POD_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
             {{- with .Values.agent.extraEnv }}
               {{- toYaml . | nindent 12 }}
             {{- end }}
