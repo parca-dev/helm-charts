@@ -1,6 +1,6 @@
 # parca
 
-![Version: 4.14.0](https://img.shields.io/badge/Version-4.14.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.19.0](https://img.shields.io/badge/AppVersion-v0.19.0-informational?style=flat-square)
+![Version: 4.15.0](https://img.shields.io/badge/Version-4.15.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.18.0](https://img.shields.io/badge/AppVersion-v0.18.0-informational?style=flat-square)
 
 Open Source Infrastructure-wide continuous profiling
 
@@ -74,7 +74,7 @@ helm repo add parca https://parca-dev.github.io/helm-charts
 | agent.nodeSelector | object | `{}` | node selector for scheduling agent pods |
 | agent.podAnnotations | object | `{}` | Additional annotations for pods |
 | agent.podExtraLabels | object | `{}` | Additional labels for pods |
-| agent.podSecurityContext | object | `{}` | Additional pod secutiry context |
+| agent.podSecurityContext | object | `{"runAsGroup":0,"runAsUser":0}` | Additional pod security context |
 | agent.remoteStoreAddress | string | `""` | Address of parca server to send profiles. If not defined, will be generated based on deployment settings. |
 | agent.remoteStoreBearerToken | string | `""` |  |
 | agent.remoteStoreInsecure | bool | `true` |  |
