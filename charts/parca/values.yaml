@@ -41,7 +41,9 @@ agent:
   # -- Additional annotations for pods
   podAnnotations: {}
   # -- Additional pod secutiry context
-  podSecurityContext: {}
+  podSecurityContext:
+    runAsUser: 0
+    runAsGroup: 0
   # -- Security context, needs to be prilileged for ful functionality
   securityContext:
     privileged: true
