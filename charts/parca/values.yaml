@@ -22,7 +22,7 @@ agent:
     # -- Overrides pullpolicy
     pullPolicy: IfNotPresent
     # -- Overrides the image tag
-    tag: "v0.23.2"
+    tag: "v0.25.0"
   # -- Agent log level
   logLevel: info
   # -- additional arguments to pass to the agent
@@ -40,8 +40,10 @@ agent:
   podExtraLabels: {}
   # -- Additional annotations for pods
   podAnnotations: {}
-  # -- Additional pod secutiry context
-  podSecurityContext: {}
+  # -- Additional pod security context
+  podSecurityContext:
+    runAsUser: 0
+    runAsGroup: 0
   # -- Security context, needs to be prilileged for ful functionality
   securityContext:
     privileged: true
