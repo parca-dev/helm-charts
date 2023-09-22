@@ -2,3 +2,5 @@
 #we need to overwrite path to socket for it to work
 agent:
   socketPath: /run/containerd/containerd.sock
+  extraArgs:
+    - --allow-running-in-non-root-pid-namespace

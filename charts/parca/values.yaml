@@ -40,7 +40,7 @@ agent:
   podExtraLabels: {}
   # -- Additional annotations for pods
   podAnnotations: {}
-  # -- Additional pod secutiry context
+  # -- Additional pod security context
   podSecurityContext:
     runAsUser: 0
     runAsGroup: 0
