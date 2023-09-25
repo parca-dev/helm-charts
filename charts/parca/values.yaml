@@ -31,6 +31,10 @@ agent:
   extraEnv: []
   # -- Additional labels for agent daemonset
   extraLabels: {}
+  # -- Additional volumeMounts for agent daemonset
+  extraVolumeMounts: []
+  # -- Additional volumes for agent daemonset
+  extraVolumes: []
   # -- Address of parca server to send profiles. If not defined, will be generated based on deployment settings.
   remoteStoreAddress: ""
   remoteStoreInsecure: true
@@ -92,6 +96,10 @@ server:
   extraEnv: []
   # -- additional labels for deployment
   extraLabels: {}
+  # -- Additional volumeMounts for server deployment
+  extraVolumeMounts: []
+  # -- Additional volumes for server deployment
+  extraVolumes: []
   # -- restart the server pod when `server.config` or `server.scrapeConfigs` changes. If this is `false`, the parca server
   # will reload the config once the mounted ConfigMap is updated, which has a delay that depends on your cluster configuration.
   restartOnConfigChange: true

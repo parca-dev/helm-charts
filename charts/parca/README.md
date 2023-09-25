@@ -1,6 +1,6 @@
 # parca
 
-![Version: 4.15.0](https://img.shields.io/badge/Version-4.15.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.19.0](https://img.shields.io/badge/AppVersion-v0.19.0-informational?style=flat-square)
+![Version: 4.16.0](https://img.shields.io/badge/Version-4.16.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.19.0](https://img.shields.io/badge/AppVersion-v0.19.0-informational?style=flat-square)
 
 Open Source Infrastructure-wide continuous profiling
 
@@ -67,6 +67,8 @@ helm repo add parca https://parca-dev.github.io/helm-charts
 | agent.extraArgs | list | `[]` | additional arguments to pass to the agent |
 | agent.extraEnv | list | `[]` | Additional container environment variables for agent |
 | agent.extraLabels | object | `{}` | Additional labels for agent daemonset |
+| agent.extraVolumeMounts | list | `[]` | Additional volumeMounts for agent daemonset |
+| agent.extraVolumes | list | `[]` | Additional volumes for agent daemonset |
 | agent.image.pullPolicy | string | `"IfNotPresent"` | Overrides pullpolicy |
 | agent.image.repository | string | `"ghcr.io/parca-dev/parca-agent"` | Overrides the image repository |
 | agent.image.tag | string | `"v0.25.0"` | Overrides the image tag |
@@ -102,6 +104,8 @@ helm repo add parca https://parca-dev.github.io/helm-charts
 | server.extraArgs | list | `[]` | additional arguments to pass to the server |
 | server.extraEnv | list | `[]` | additional container environment variables for server |
 | server.extraLabels | object | `{}` | additional labels for deployment |
+| server.extraVolumeMounts | list | `[]` | Additional volumeMounts for server deployment |
+| server.extraVolumes | list | `[]` | Additional volumes for server deployment |
 | server.image.pullPolicy | string | `"IfNotPresent"` | Overrides pull policy for server |
 | server.image.repository | string | `"ghcr.io/parca-dev/parca"` | Overrides the image repository for server |
 | server.image.tag | string | `"v0.19.0"` | Overrides the image tag for server |

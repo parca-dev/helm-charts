@@ -100,6 +100,9 @@ spec:
           - mountPath: /var/parca-agent-remote-store-bearer-token
             name: parca-agent-remote-store-bearer-token
           {{- end }}
+          {{- with .Values.agent.extraVolumeMounts }}
+            {{- toYaml . | nindent 10 }}
+          {{- end }}
           resources:
             {{- toYaml .Values.agent.resources | nindent 12 }}
       hostPID: true
@@ -128,6 +131,9 @@ spec:
       - name: parca-agent-remote-store-bearer-token
         secret:
           secretName: parca-agent-remote-store-bearer-token
+      {{- end }}
+      {{- with .Values.agent.extraVolumes }}
+        {{- toYaml . | nindent 6 }}
       {{- end }}
       {{- with .Values.agent.tolerations }}
       tolerations:
