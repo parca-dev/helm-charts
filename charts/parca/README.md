@@ -1,6 +1,6 @@
 # parca
 
-![Version: 4.17.0](https://img.shields.io/badge/Version-4.17.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.19.0](https://img.shields.io/badge/AppVersion-v0.19.0-informational?style=flat-square)
+![Version: 4.18.0](https://img.shields.io/badge/Version-4.18.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.20.0](https://img.shields.io/badge/AppVersion-v0.20.0-informational?style=flat-square)
 
 Open Source Infrastructure-wide continuous profiling
 
@@ -108,7 +108,7 @@ helm repo add parca https://parca-dev.github.io/helm-charts
 | server.extraVolumes | list | `[]` | Additional volumes for server deployment |
 | server.image.pullPolicy | string | `"IfNotPresent"` | Overrides pull policy for server |
 | server.image.repository | string | `"ghcr.io/parca-dev/parca"` | Overrides the image repository for server |
-| server.image.tag | string | `"v0.19.0"` | Overrides the image tag for server |
+| server.image.tag | string | `"v0.20.0"` | Overrides the image tag for server |
 | server.logLevel | string | `"info"` | logging level of parca server |
 | server.nodeSelector | object | `{}` | node selector for scheduling server pod |
 | server.otlpAddress | string | `""` | OpenTelemetry collector address to send traces to |
