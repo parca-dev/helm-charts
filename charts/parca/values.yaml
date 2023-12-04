@@ -22,7 +22,7 @@ agent:
     # -- Overrides pullpolicy
     pullPolicy: IfNotPresent
     # -- Overrides the image tag
-    tag: "v0.27.0"
+    tag: "v0.28.0"
   # -- Agent log level
   logLevel: info
   # -- additional arguments to pass to the agent
