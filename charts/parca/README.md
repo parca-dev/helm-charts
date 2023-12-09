@@ -1,6 +1,6 @@
 # parca
 
-![Version: 4.18.0](https://img.shields.io/badge/Version-4.18.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.20.0](https://img.shields.io/badge/AppVersion-v0.20.0-informational?style=flat-square)
+![Version: 4.19.0](https://img.shields.io/badge/Version-4.19.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.20.0](https://img.shields.io/badge/AppVersion-v0.20.0-informational?style=flat-square)
 
 Open Source Infrastructure-wide continuous profiling
 
@@ -71,7 +71,7 @@ helm repo add parca https://parca-dev.github.io/helm-charts
 | agent.extraVolumes | list | `[]` | Additional volumes for agent daemonset |
 | agent.image.pullPolicy | string | `"IfNotPresent"` | Overrides pullpolicy |
 | agent.image.repository | string | `"ghcr.io/parca-dev/parca-agent"` | Overrides the image repository |
-| agent.image.tag | string | `"v0.27.0"` | Overrides the image tag |
+| agent.image.tag | string | `"v0.28.0"` | Overrides the image tag |
 | agent.logLevel | string | `"info"` | Agent log level |
 | agent.nodeSelector | object | `{}` | node selector for scheduling agent pods |
 | agent.podAnnotations | object | `{}` | Additional annotations for pods |
