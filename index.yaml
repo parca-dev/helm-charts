@@ -3,6 +3,20 @@ entries:
   parca:
   - apiVersion: v2
     appVersion: v0.20.0
+    created: "2023-12-09T22:16:24.352472298Z"
+    description: Open Source Infrastructure-wide continuous profiling
+    digest: 15a34882246e2bd0c762164f2dae5007f2f55c753fd10da752fe6e5a1cd0a009
+    home: https://parca.dev/
+    icon: https://avatars.githubusercontent.com/u/86306284?s=200&v=4
+    name: parca
+    sources:
+    - https://github.com/parca-dev/helm-charts
+    type: application
+    urls:
+    - https://github.com/parca-dev/helm-charts/releases/download/parca-4.19.0/parca-4.19.0.tgz
+    version: 4.19.0
+  - apiVersion: v2
+    appVersion: v0.20.0
     created: "2023-11-20T14:22:37.36105569Z"
     description: Open Source Infrastructure-wide continuous profiling
     digest: e9f66cb689105b8b18468a8b0bb65f8c433fa43e2246e6ae0399ad53d0881a3e
@@ -435,4 +449,4 @@ entries:
     urls:
     - https://github.com/parca-dev/helm-charts/releases/download/parca-1.6.1/parca-1.6.1.tgz
     version: 1.6.1
-generated: "2023-11-20T14:22:37.361283014Z"
+generated: "2023-12-09T22:16:24.352791565Z"
