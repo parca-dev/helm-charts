@@ -16,7 +16,7 @@ spec:
   {{- end }}
   ports:
     - port: {{ .Values.server.service.port }}
-      targetPort: 7070
+      targetPort: {{ .Values.server.service.targetPort | default 7070 }}
       protocol: TCP
       name: http
   selector:
