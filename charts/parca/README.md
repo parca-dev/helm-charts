@@ -102,6 +102,7 @@ helm repo add parca https://parca-dev.github.io/helm-charts
 | server.corsAllowedOrigins | string | `"*"` | CORS setting |
 | server.enabled | bool | `true` | Allows disabling parca server |
 | server.extraArgs | list | `[]` | additional arguments to pass to the server |
+| server.extraContainers | list | `[]` | extra containers (e.g: auth proxy) |
 | server.extraEnv | list | `[]` | additional container environment variables for server |
 | server.extraLabels | object | `{}` | additional labels for deployment |
 | server.extraVolumeMounts | list | `[]` | Additional volumeMounts for server deployment |
@@ -123,6 +124,7 @@ helm repo add parca https://parca-dev.github.io/helm-charts
 | server.service.annotations | object | `{}` | annotations to be added for the server service |
 | server.service.loadBalancerIP | string | `nil` | load balancer static IP |
 | server.service.port | int | `7070` | service port for server |
+| server.service.targetPort | int | `7070` | service target port for server |
 | server.service.type | string | `"ClusterIP"` | service type for server |
 | server.serviceMonitor.enabled | bool | `false` | enables servicemonitor for server monitoring |
 | server.serviceMonitor.jobLabel | string | `"parca-server"` |  |

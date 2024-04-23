@@ -82,6 +82,8 @@ server:
     pullPolicy: IfNotPresent
     # -- Overrides the image tag for server
     tag: "v0.20.0"
+  # -- extra containers (e.g: auth proxy)
+  extraContainers: []
   # -- logging level of parca server
   logLevel: info
   # -- CORS setting
@@ -152,6 +154,8 @@ server:
     loadBalancerIP:
     # -- service port for server
     port: 7070
+    # -- service target port for server
+    targetPort: 7070
     # -- annotations to be added for the server service
     annotations: {}
   serviceMonitor:
