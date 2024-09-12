@@ -22,7 +22,7 @@ agent:
     # -- Overrides pullpolicy
     pullPolicy: IfNotPresent
     # -- Overrides the image tag
-    tag: "v0.28.0"
+    tag: "v0.32.0"
   # -- Agent log level
   logLevel: info
   # -- additional arguments to pass to the agent
@@ -81,7 +81,7 @@ server:
     # -- Overrides pull policy for server
     pullPolicy: IfNotPresent
     # -- Overrides the image tag for server
-    tag: "v0.20.0"
+    tag: "v0.22.0"
   # -- extra containers (e.g: auth proxy)
   extraContainers: []
   # -- logging level of parca server
