@@ -135,7 +135,6 @@ server:
       bucket:
         type: "FILESYSTEM"
         config:
-          directory: "./tmp"
   # -- scrape configs for parca server
   scrapeConfigs:
     - job_name: 'kubernetes-pods'
