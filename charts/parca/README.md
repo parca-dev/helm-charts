@@ -61,7 +61,7 @@ helm repo add parca https://parca-dev.github.io/helm-charts
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| agent.config | object | `{"relabel_configs":null}` | parca agent config block |
+| agent.config | object | `{"relabel_configs":[{"source_labels":["__meta_process_executable_compiler"],"target_label":"compiler"},{"source_labels":["__meta_system_kernel_machine"],"target_label":"arch"},{"source_labels":["__meta_system_kernel_release"],"target_label":"kernel_version"},{"source_labels":["__meta_kubernetes_namespace"],"target_label":"namespace"},{"source_labels":["__meta_kubernetes_pod_name"],"target_label":"pod"},{"source_labels":["__meta_kubernetes_pod_container_name"],"target_label":"container"},{"source_labels":["__meta_kubernetes_pod_container_image"],"target_label":"container_image"},{"source_labels":["__meta_kubernetes_node_label_topology_kubernetes_io_region"],"target_label":"region"},{"source_labels":["__meta_kubernetes_node_label_topology_kubernetes_io_zone"],"target_label":"zone"},{"action":"labelmap","regex":"__meta_kubernetes_pod_label_(.+)","replacement":"${1}"},{"action":"labeldrop","regex":"apps_kubernetes_io_pod_index|controller_revision_hash|statefulset_kubernetes_io_pod_name|pod_template_hash"}]}` | parca agent config block |
 | agent.enablePsp | bool | `false` | If the PodSecurityPolicy should be enabled |
 | agent.enabled | bool | `true` | Allows disabling parca agent |
 | agent.extraArgs | list | `[]` | additional arguments to pass to the agent |
@@ -98,7 +98,7 @@ helm repo add parca https://parca-dev.github.io/helm-charts
 | ingress.hosts[0].paths[0].pathType | string | `"ImplementationSpecific"` |  |
 | ingress.tls | list | `[]` |  |
 | nameOverride | string | `""` | overrides chart name |
-| server.config | object | `{"object_storage":{"bucket":{"config":{"directory":"./tmp"},"type":"FILESYSTEM"}}}` | parca server config block |
+| server.config | object | `{"object_storage":{"bucket":{"config":null,"type":"FILESYSTEM"}}}` | parca server config block |
 | server.corsAllowedOrigins | string | `"*"` | CORS setting |
 | server.enabled | bool | `true` | Allows disabling parca server |
 | server.extraArgs | list | `[]` | additional arguments to pass to the server |
