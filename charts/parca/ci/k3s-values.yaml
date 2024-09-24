@@ -4,3 +4,9 @@ agent:
   socketPath: /run/containerd/containerd.sock
   extraArgs:
     - --allow-running-in-non-root-pid-namespace
+server:
+  config:
+    object_storage:
+      bucket:
+        config:
+          directory: "./tmp"
