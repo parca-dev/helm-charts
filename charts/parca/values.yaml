@@ -57,6 +57,8 @@ agent:
     type: ClusterIP
     # -- service port for agent
     port: 7071
+    # -- annotations to be added for the agent service
+    annotations: {}
   serviceMonitor:
     # -- enables prometheus servicemonitor for agent
     enabled: false
