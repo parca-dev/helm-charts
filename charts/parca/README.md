@@ -83,6 +83,7 @@ helm repo add parca https://parca-dev.github.io/helm-charts
 | agent.remoteStoreInsecureSkipVerify | bool | `true` |  |
 | agent.resources | object | `{}` | resource limits and requests |
 | agent.securityContext | object | `{"privileged":true,"readOnlyRootFilesystem":true}` | Security context, needs to be prilileged for ful functionality |
+| agent.service.annotations | object | `{}` | annotations to be added for the agent service |
 | agent.service.port | int | `7071` | service port for agent |
 | agent.service.type | string | `"ClusterIP"` | service type for agent |
 | agent.serviceMonitor.enabled | bool | `false` | enables prometheus servicemonitor for agent |

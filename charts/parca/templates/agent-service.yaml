@@ -5,6 +5,10 @@ metadata:
   name: {{ include "parca.fullname" . }}-agent
   labels:
     {{- include "parca.labels.agent" . | nindent 4 }}
+  {{- with .Values.agent.service.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
 spec:
   type: {{ .Values.agent.service.type }}
   ports:
