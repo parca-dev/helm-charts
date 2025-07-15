@@ -43,7 +43,6 @@ spec:
           image: "{{ .Values.agent.image.repository }}:{{ .Values.agent.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.agent.image.pullPolicy }}
           args:
-            - /bin/parca-agent
             - --log-level={{ .Values.agent.logLevel }}
             - --node=$(NODE_NAME)
             - --http-address=$(MY_POD_IP):7071

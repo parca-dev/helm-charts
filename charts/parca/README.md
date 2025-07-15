@@ -1,6 +1,6 @@
 # parca
 
-![Version: 4.19.0](https://img.shields.io/badge/Version-4.19.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.20.0](https://img.shields.io/badge/AppVersion-v0.20.0-informational?style=flat-square)
+![Version: 4.20.0](https://img.shields.io/badge/Version-4.20.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.22.0](https://img.shields.io/badge/AppVersion-v0.22.0-informational?style=flat-square)
 
 Open Source Infrastructure-wide continuous profiling
 
@@ -61,7 +61,7 @@ helm repo add parca https://parca-dev.github.io/helm-charts
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| agent.config | object | `{"relabel_configs":null}` | parca agent config block |
+| agent.config | object | `{"relabel_configs":[{"source_labels":["__meta_process_executable_compiler"],"target_label":"compiler"},{"source_labels":["__meta_system_kernel_machine"],"target_label":"arch"},{"source_labels":["__meta_system_kernel_release"],"target_label":"kernel_version"},{"source_labels":["__meta_kubernetes_namespace"],"target_label":"namespace"},{"source_labels":["__meta_kubernetes_pod_name"],"target_label":"pod"},{"source_labels":["__meta_kubernetes_pod_container_name"],"target_label":"container"},{"source_labels":["__meta_kubernetes_pod_container_image"],"target_label":"container_image"},{"source_labels":["__meta_kubernetes_node_label_topology_kubernetes_io_region"],"target_label":"region"},{"source_labels":["__meta_kubernetes_node_label_topology_kubernetes_io_zone"],"target_label":"zone"},{"action":"labelmap","regex":"__meta_kubernetes_pod_label_(.+)","replacement":"${1}"},{"action":"labeldrop","regex":"apps_kubernetes_io_pod_index|controller_revision_hash|statefulset_kubernetes_io_pod_name|pod_template_hash"}]}` | parca agent config block |
 | agent.enablePsp | bool | `false` | If the PodSecurityPolicy should be enabled |
 | agent.enabled | bool | `true` | Allows disabling parca agent |
 | agent.extraArgs | list | `[]` | additional arguments to pass to the agent |
@@ -71,7 +71,7 @@ helm repo add parca https://parca-dev.github.io/helm-charts
 | agent.extraVolumes | list | `[]` | Additional volumes for agent daemonset |
 | agent.image.pullPolicy | string | `"IfNotPresent"` | Overrides pullpolicy |
 | agent.image.repository | string | `"ghcr.io/parca-dev/parca-agent"` | Overrides the image repository |
-| agent.image.tag | string | `"v0.28.0"` | Overrides the image tag |
+| agent.image.tag | string | `"v0.32.0"` | Overrides the image tag |
 | agent.logLevel | string | `"info"` | Agent log level |
 | agent.nodeSelector | object | `{}` | node selector for scheduling agent pods |
 | agent.podAnnotations | object | `{}` | Additional annotations for pods |
@@ -99,7 +99,7 @@ helm repo add parca https://parca-dev.github.io/helm-charts
 | ingress.hosts[0].paths[0].pathType | string | `"ImplementationSpecific"` |  |
 | ingress.tls | list | `[]` |  |
 | nameOverride | string | `""` | overrides chart name |
-| server.config | object | `{"object_storage":{"bucket":{"config":{"directory":"./tmp"},"type":"FILESYSTEM"}}}` | parca server config block |
+| server.config | object | `{"object_storage":{"bucket":{"config":null,"type":"FILESYSTEM"}}}` | parca server config block |
 | server.corsAllowedOrigins | string | `"*"` | CORS setting |
 | server.enabled | bool | `true` | Allows disabling parca server |
 | server.extraArgs | list | `[]` | additional arguments to pass to the server |
@@ -110,7 +110,7 @@ helm repo add parca https://parca-dev.github.io/helm-charts
 | server.extraVolumes | list | `[]` | Additional volumes for server deployment |
 | server.image.pullPolicy | string | `"IfNotPresent"` | Overrides pull policy for server |
 | server.image.repository | string | `"ghcr.io/parca-dev/parca"` | Overrides the image repository for server |
-| server.image.tag | string | `"v0.20.0"` | Overrides the image tag for server |
+| server.image.tag | string | `"v0.22.0"` | Overrides the image tag for server |
 | server.logLevel | string | `"info"` | logging level of parca server |
 | server.nodeSelector | object | `{}` | node selector for scheduling server pod |
 | server.otlpAddress | string | `""` | OpenTelemetry collector address to send traces to |
