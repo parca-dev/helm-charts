@@ -94,6 +94,9 @@ spec:
             name: cgroup
           - mountPath: /sys/fs/bpf
             name: bpffs
+          # NOTE: modify this if containerd is not used
+          - mountPath: /run/containerd/
+            name: cri-socket
           - mountPath: /var/parca
             name: {{ include "parca.fullname" . }}-agent-config
           {{- if .Values.agent.remoteStoreBearerToken }}
@@ -124,6 +127,10 @@ spec:
       - hostPath:
           path: /sys/kernel/debug
         name: debugfs
+      # NOTE: modify this if containerd is not used
+      - hostPath:
+          path: /run/containerd/
+        name: cri-socket
       - configMap:
           name: {{ include "parca.fullname" . }}-agent-config
         name: {{ include "parca.fullname" . }}-agent-config
